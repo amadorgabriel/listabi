@@ -1,70 +1,94 @@
 import React from "react";
-import { Platform } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
+import { Platform, TouchableOpacity, View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+import { Feather } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { Home } from "../pages/Home";
 import { Extract } from "../pages/Extract";
 import { SearchProduct } from "../pages/SearchProduct";
 
-const bottomTab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 const BottomRoutes: React.FC = () => {
+
   return (
-    <bottomTab.Navigator
+    <Tab.Navigator
       tabBarOptions={{
         activeTintColor: "#66A466",
-        inactiveTintColor: "#3f573f",
+        inactiveTintColor: "#A8C8A3",
+        showLabel: false,
         style: {
+          paddingBottom: 5,
           paddingVertical: Platform.OS === "ios" ? 20 : 0,
-          height: 60,
+          height: 70,
+          backgroundColor: "#D4E8D7",
         },
       }}
     >
-      <bottomTab.Screen
+      <Tab.Screen
         name="Home"
         component={Home}
         options={{
-          tabBarIcon: ({ size, color }) => (
-            <MaterialIcons
-              name="format-list-bulleted"
-              size={size}
-              color={color}
-            />
-          ),
+          tabBarIcon: ({ color }) =>  (
+              <MaterialCommunityIcons
+                name="home-outline"
+                size={30}
+                color={color}
+              />
+            )
         }}
       />
 
-      <bottomTab.Screen
+      <Tab.Screen
         name="Adicionar"
         component={SearchProduct}
         options={{
-          tabBarIcon: ({ size, color }) => (
-            <MaterialIcons
-              name="add-circle-outline"
-              size={size}
-              color={color}
-            />
+          tabBarIcon: () => <Feather name="plus" color="#FFF" size={30} />,
+          tabBarButton: ({ onPress, children }) => (
+            <TouchableOpacity
+              accessibilityRole="button"
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                paddingBottom: 30,
+              }}
+              onPress={onPress}
+            >
+              <View
+                style={{
+                  top: -10,
+                  width: 70,
+                  height: 70,
+                  borderRadius: 180,
+                  backgroundColor: "#A8C8A3",
+                }}
+              >
+                {children}
+              </View>
+
+            </TouchableOpacity>
           ),
         }}
       />
 
-      <bottomTab.Screen
+      <Tab.Screen
         name="Extrato"
         component={Extract}
         options={{
-          tabBarIcon: ({ size, color }) => (
-            <MaterialIcons
-              name="format-list-bulleted"
-              size={size}
-              color={color}
-            />
-          ),
+          tabBarIcon: ({ color }) => (
+              <MaterialIcons
+                name="format-list-bulleted"
+                size={30}
+                color={color}
+              />
+            )
         }}
       />
-    </bottomTab.Navigator>
+    </Tab.Navigator>
   );
 };
 
-
-export default BottomRoutes
+export default BottomRoutes;
