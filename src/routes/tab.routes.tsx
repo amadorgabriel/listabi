@@ -10,6 +10,8 @@ import { Home } from "../pages/Home";
 import { Extract } from "../pages/Extract";
 import { SearchProduct } from "../pages/SearchProduct";
 
+import colors from "../styles/colors"
+
 const Tab = createBottomTabNavigator();
 
 const BottomRoutes: React.FC = () => {
@@ -24,7 +26,7 @@ const BottomRoutes: React.FC = () => {
           paddingBottom: 5,
           paddingVertical: Platform.OS === "ios" ? 20 : 0,
           height: 70,
-          backgroundColor: "#D4E8D7",
+          backgroundColor: colors.green_background,
         },
       }}
     >
