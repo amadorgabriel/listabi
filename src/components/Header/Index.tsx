@@ -3,19 +3,19 @@ import { View, Image, Text, StyleSheet } from "react-native"
 import { format } from 'date-fns'
 import ptBR from "date-fns/locale/pt-BR";
 
-
 import fonts from "../../styles/fonts"
 import colors from "../../styles/colors"
 
-export const Header = () => {
+import LogoImg from "../../assets/logo.svg";
 
+export const Header = () => {
   const currentDate = format(new Date(), "EEEEEE, d MMMM", {
     locale: ptBR
   });
 
   return (
     <View style={styles.container}>
-      <Image source={require("../../assets/logo.png")} style={styles.logo}/>
+      <LogoImg width={25} height={25} style={styles.logo} />
 
       <Text style={styles.date}>{currentDate}</Text>
     </ View>
@@ -28,13 +28,10 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 5,
+    justifyContent: 'space-between'
   },
   logo: {
-    width: 80,
-    height: 80,
-    opacity: 0.6
+    opacity: 0.8
   },
   date: {
     fontFamily: fonts.text,
