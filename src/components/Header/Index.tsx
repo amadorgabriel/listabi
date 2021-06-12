@@ -1,10 +1,10 @@
 import React from "react"
-import { View, Image, Text, StyleSheet } from "react-native"
+import { View, Text, StyleSheet } from "react-native"
 import { format } from 'date-fns'
 import ptBR from "date-fns/locale/pt-BR";
 
 import fonts from "../../styles/fonts"
-import colors from "../../styles/colors"
+import { theme } from "../../styles/colors"
 
 import LogoImg from "../../assets/logo.svg";
 
@@ -34,9 +34,9 @@ const styles = StyleSheet.create({
     opacity: 0.8
   },
   date: {
-    fontFamily: fonts.text,
+    // fontFamily: fonts.text,
     fontSize: 18,
-    color: colors.light_text,
+    color: theme.colors.typografy.paragraph.primary,
     textTransform: 'capitalize'
   }
 })

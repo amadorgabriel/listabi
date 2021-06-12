@@ -10,7 +10,7 @@ import { Home } from "../pages/Home";
 import { Extract } from "../pages/Extract";
 import { SearchProduct } from "../pages/SearchProduct";
 
-import colors from "../styles/colors"
+import { theme } from "../styles/colors"
 
 const Tab = createBottomTabNavigator();
 
@@ -19,14 +19,15 @@ const BottomRoutes: React.FC = () => {
   return (
     <Tab.Navigator
       tabBarOptions={{
-        activeTintColor: "#66A466",
-        inactiveTintColor: "#A8C8A3",
+        activeTintColor: theme.colors.bottomTab.activeTintColor,
+        inactiveTintColor: theme.colors.bottomTab.inactiveTintColor,
         showLabel: false,
         style: {
           paddingBottom: 5,
+          width: '100%',
           paddingVertical: Platform.OS === "ios" ? 20 : 0,
           height: 70,
-          backgroundColor: colors.green_background,
+          backgroundColor: theme.colors.bottomTab.background,
         },
       }}
     >
