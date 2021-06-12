@@ -1,14 +1,13 @@
 import styled from "styled-components/native";
-import { TextProps, ViewProps, TouchableHighlightProps } from "react-native";
 
 import fonts from "../../styles/fonts";
-import colors from "../../styles/colors";
 import { StyledButtonProps } from "./interface";
 
 export const Touchable: any = styled.TouchableHighlight<StyledButtonProps>`
   width: 100%;
   background-color: transparent;
   border-radius: 10px;
+  opacity: ${({ disabled }) => (disabled === true ? 0.5 : 1)};
 `;
 
 Touchable.Button = styled.View<StyledButtonProps>`
@@ -16,7 +15,32 @@ Touchable.Button = styled.View<StyledButtonProps>`
   display: flex;
   align-items: center;
   border-radius: 10px;
-  background-color: ${({ color }) => color || colors.green};
+  background-color: ${({ variant }) => {
+    switch (variant) {
+      case "accept":
+        return "#28C313";
+
+      case "reject":
+        return "#FF3C38";
+
+      case "outlined":
+        return "#FFF";
+        
+      default:
+        return "#6ABF6A";
+    }
+  }};
+
+  border: ${({ variant }) => {
+    switch (variant) {
+      case "outlined":
+        return "2px solid #6ABF6A";
+
+      default:
+        return "none";
+    }
+  }};
+
   padding: ${({ size }) => {
     switch (size) {
       case "small":
@@ -45,7 +69,16 @@ Touchable.Label = styled.Text<StyledButtonProps>`
     }
   }};
   /* font-family: ${fonts.heading}; */
-  color: #fff;
+  color: ${({ variant }) => {
+    switch (variant) {
+      case "outlined":
+        return "#6ABF6A";
+
+      default:
+        return "#fff";
+    }
+  }};
+  font-weight: 800;
   text-transform: capitalize;
   text-align: center;
 `;

@@ -7,7 +7,7 @@ interface ButtonProps extends TouchableHighlightProps{
 
 export interface StyledButtonProps extends ButtonProps{
   size?: "small" | "medium" | "large";
-  variant?: "primary" | "outlined";
+  variant?: "primary" | "outlined" | "accept" | "reject" ;
   disabled?: boolean;
-  color?: string;
+  color?: "accept" | "reject" | "default";
 }
