@@ -7,7 +7,7 @@ export const Button: React.FC<StyledButtonProps> = ({
   label,
   onPress,
   size,
-  disabled = false, 
+  disabled = false,  
   variant = "primary",
   ...rest
 }: StyledButtonProps) => {

@@ -23,9 +23,9 @@ export const themeColors = {
   },
   button: {},
   bottomTab: {
-    background: "#D9E8D9",
-    activeTintColor: "#6ABF6A",
-    inactiveTintColor: "#66A466",
+    background: colors.blue,
+    activeTintColor: colors.white,
+    inactiveTintColor: colors.white,
   },
 };
 

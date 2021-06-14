@@ -1,13 +1,14 @@
 import React from 'react';
 import { StyleSheet, SafeAreaView, Text } from 'react-native'
+import { theme } from "../styles/colors"
 
-import { Header } from "../components/Header/Index"
-import colors from "../styles/colors"
+import { Header } from '../components/Header/Index'
+import { Button } from '../components/Button/Index'
 
-export const Home = () => {
+export const Home:React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Home/Minha lista</Text>
+      <Header />
     </SafeAreaView>
   )
 }
@@ -15,8 +16,9 @@ export const Home = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: theme.colors.white ,
     alignItems: "center",
     justifyContent: "center",
+    paddingHorizontal: 30,
   }
 })
