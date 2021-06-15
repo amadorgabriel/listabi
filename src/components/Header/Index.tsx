@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native"
 import { format } from 'date-fns'
 import ptBR from "date-fns/locale/pt-BR";
 
-import fonts from "../../styles/fonts"
+import { fonts } from "../../styles/fonts"
 import { theme } from "../../styles/colors"
 
 import LogoImg from "../../assets/logo.svg";
@@ -28,15 +28,17 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    marginTop: 25,
+    marginBottom: 35,
   },
   logo: {
-    opacity: 0.8
+    opacity: 0.9
   },
   date: {
-    // fontFamily: fonts.text,
+    fontFamily: `${fonts.text}`,
     fontSize: 18,
-    color: theme.colors.typografy.paragraph.primary,
+    color: `${theme.colors.typografy.paragraph.secondary}`,
     textTransform: 'capitalize'
   }
 })
