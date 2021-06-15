@@ -1,23 +1,22 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { Card as CardView } from "./styles";
 
-interface CardProps {
-  children: Text
+export interface CardProps {
+  message: string;
+  variant?: "filled" | "outlined";
+  align?: "left" | "center";
 }
 
-export const Card: React.FC<CardProps> = ({ children}) => {
+export const Card: React.FC<CardProps> = ({
+  message,
+  variant = "filled",
+  align = "center",
+}) => {
   return (
-    <View style={styles.container}>
-      {children}
-    </View>
+    <CardView variant={variant}>
+      <CardView.Text variant={variant} align={align}>
+        {message}
+      </CardView.Text>
+    </CardView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    borderRadius: 20,
-    backgroundColor: 'green',
-    fontSize: 18
-  },
-});
