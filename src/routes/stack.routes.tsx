@@ -11,6 +11,7 @@ const AppRoutes: React.FC = () => {
   return (
     <stackRoutes.Navigator
       headerMode="none"
+      initialRouteName="Adicionar"
         screenOptions={{
           cardStyle: {
             backgroundColor: '#fff'

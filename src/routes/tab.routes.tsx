@@ -4,7 +4,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { Feather } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { Home } from "../pages/Home";
 import { Extract } from "../pages/Extract";
@@ -36,8 +35,8 @@ const BottomRoutes: React.FC = () => {
         component={Home}
         options={{
           tabBarIcon: ({ color }) =>  (
-              <MaterialCommunityIcons
-                name="home-outline"
+              <Feather
+                name="home"
                 size={30}
                 color={color}
               />
@@ -66,7 +65,7 @@ const BottomRoutes: React.FC = () => {
                   width: 70,
                   height: 70,
                   borderRadius: 180,
-                  backgroundColor: "#A8C8A3",
+                  backgroundColor: theme.colors.bottomTab.backgroundCustomButtom,
                 }}
               >
                 {children}

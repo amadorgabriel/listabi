@@ -1,19 +1,25 @@
-import React from "react"
-import { NavigationContainer } from "@react-navigation/native" 
-import { ThemeProvider } from "styled-components/native"
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { ThemeProvider } from "styled-components/native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import StackRoutes from "./stack.routes";
-import TabRoutes from "./tab.routes"
-import { theme } from '../../src/styles/colors/index'
+import TabRoutes from "./tab.routes";
+import { theme } from "../../src/styles/colors/index";
 
 const Routes: React.FC = () => {
-  return(
+  return (
     <ThemeProvider theme={theme}>
-      <NavigationContainer>
-        <TabRoutes /> 
-      </NavigationContainer>
-    </ThemeProvider>
-  )
-}
+      <SafeAreaProvider>
+        <NavigationContainer>
+          {/* <StackRoutes> */}
 
-export default Routes
+          <TabRoutes />
+          {/* </StackRoutes> */}
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </ThemeProvider>
+  );
+};
+
+export default Routes;
