@@ -7,25 +7,35 @@ const colors = {
   water_green_dark: "##2C9B72",
   blue: "#30837F",
   blue_dark: "#31626D",
+  gray: "#5A818A",
   red: "#FF3C38",
 
   white: "#FFFFFF",
+  white_secondary: '#FBFFFE',
   transparent: "tranparent",
 };
 
 export const themeColors = {
   white: colors.white,
+  background: colors.white_secondary,
+
+  button: {},
+  bottomTab: {
+    background: colors.blue,
+    backgroundCustomButtom: colors.green_primary,
+    activeTintColor: colors.white,
+    inactiveTintColor: colors.white,
+  },
+  cards: {
+    primary: colors.purple,
+    secondary: colors.gray
+  },
+  
   typografy: {
     title: {},
     paragraph: {
       primary: "#898989",
     },
-  },
-  button: {},
-  bottomTab: {
-    background: colors.blue,
-    activeTintColor: colors.white,
-    inactiveTintColor: colors.white,
   },
 };
 
