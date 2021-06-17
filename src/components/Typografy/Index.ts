@@ -9,6 +9,12 @@ export const Text:any = styled.Text`
   color: ${({theme}) => theme.colors.typografy.paragraph.primary};
 `
 
+export const Display = styled(Title)`
+  font-size: 40px;
+  font-family: ${fonts.subtitle};
+  color: ${({theme}) => theme.colors.typografy.display.primary};
+`;
+
 export const H1 = styled(Title)`
   font-size: 30px;
   line-height: 34px;
@@ -23,9 +29,16 @@ export const H2 = styled(Title)`
 
 Text.Subtitle = styled(Text)`
   font-size: 18px;
-  font-family: ${fonts.text}
+  font-family: ${fonts.text};
 `
+
 Text.Medium = styled(Text)`
-  font-size: 20px;
-  font-family: ${fonts.display}
+  font-size: 16px;
+  font-family: ${fonts.display};
+`
+
+Text.Small = styled(Text)`
+  font-size: 13px;
+  line-height: 13px;
+  font-family: ${fonts.text}
 `
