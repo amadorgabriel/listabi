@@ -1,22 +1,7 @@
-import React from "react";
+import { LabelButton } from './Label/Index'
 
-import { Touchable } from "./styles";
-import { StyledButtonProps } from "./interface";
+import { IconLabelButton } from './IconLabel/Index'
 
-export const Button: React.FC<StyledButtonProps> = ({
-  label,
-  onPress,
-  size,
-  disabled = false,  
-  variant = "primary",
-  ...rest
-}: StyledButtonProps) => {
-  
-  return (
-    <Touchable onPress={onPress} disabled={disabled} {...rest}>
-      <Touchable.Button size={size} variant={variant} >
-        <Touchable.Label size={size} variant={variant}> {label}</Touchable.Label>
-      </Touchable.Button>
-    </Touchable>
-  );
-};
+import { IconButton } from './Icon/Index'
+
+export { LabelButton, IconLabelButton, IconButton }
