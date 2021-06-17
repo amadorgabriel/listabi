@@ -30,7 +30,7 @@ export const TouchableButton: any = styled.TouchableHighlight<StyledLabelButtonP
         return "8px 0";
 
       default:
-        return "10px 0";
+        return "12px 0";
     }
   }};
 `;
@@ -42,7 +42,7 @@ TouchableButton.Label = styled.Text<StyledLabelButtonProps>`
         return "13px";
 
       default:
-        return "14px";
+        return "15px";
     }
   }};
 

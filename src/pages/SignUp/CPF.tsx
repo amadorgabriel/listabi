@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   View,
@@ -8,10 +8,11 @@ import {
   Platform,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 
 import { theme } from "../../styles/colors";
+import { cpfMask } from "../../utils/maskCpf";
 import { AntDesign } from "@expo/vector-icons";
 
 import BottomAbstractArt from "../../assets/abstract-bottom-art.svg";
@@ -23,6 +24,9 @@ import { H1, Text as CustomText } from "../../components/Typografy/Index";
 
 export const CPFSignUp: React.FC = () => {
   const { navigate } = useNavigation();
+  const route: any = useRoute();
+
+  const [cpfValue, setCpfValue] = useState("Cpf");
 
   return (
     <KeyboardAvoidingView
@@ -47,12 +51,23 @@ export const CPFSignUp: React.FC = () => {
 
                 <OutlineInput
                   placeholder="CPF"
+                  keyboardType="numeric"
+                  defaultValue={cpfMask(cpfValue)}
+                  onChangeText={(cpfValue) => {
+                    setCpfValue(cpfValue);
+                  }}
                   onChange={() => {}}
                   style={styles.input}
+                  maxLength={14}
+                  returnKeyType="next"
                 />
 
                 <IconButton
-                  onPress={() => navigate("SigUpPassword")}
+                  onPress={() =>
+                    navigate("SigUpPassword", {
+                      firstUserName: route.params?.firstUserName,
+                    })
+                  }
                   hasShadow
                   style={styles.button}
                 >

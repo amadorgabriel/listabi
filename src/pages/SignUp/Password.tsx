@@ -8,7 +8,7 @@ import {
   Platform,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 
 import { theme } from "../../styles/colors";
@@ -23,6 +23,7 @@ import { H1, Text as CustomText } from "../../components/Typografy/Index";
 
 export const PasswordSignUp: React.FC = () => {
   const { navigate } = useNavigation();
+  const route: any = useRoute();
 
   return (
     <KeyboardAvoidingView
@@ -42,8 +43,10 @@ export const PasswordSignUp: React.FC = () => {
                   <CustomText.Subtitle>
                     Por fim
                     <CustomText.SubtitleBold>
-                      {" "}
-                      firstUserMockName,{" "}
+                      {route.params?.firstUserName == ""
+                        ? null
+                        : ` ${route.params?.firstUserName}`}
+                      ,{" "}
                     </CustomText.SubtitleBold>
                     insira uma senha segura
                   </CustomText.Subtitle>

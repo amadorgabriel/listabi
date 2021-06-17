@@ -8,7 +8,7 @@ import {
   Platform,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 
 import { theme } from "../../styles/colors";
@@ -23,10 +23,11 @@ import { H1, Text as CustomText } from "../../components/Typografy/Index";
 
 export const EmailSignUp: React.FC = () => {
   const { navigate } = useNavigation();
+  const route: any = useRoute();
 
   return (
     <KeyboardAvoidingView
-      style={styles.avoidView}  
+      style={styles.avoidView}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       keyboardVerticalOffset={20}
     >
@@ -34,13 +35,18 @@ export const EmailSignUp: React.FC = () => {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
             <View style={styles.container}>
-              <Header alternativeText="Passo 2 de 4" style={styles.header}/>
+              <Header alternativeText="Passo 2 de 4" style={styles.header} />
 
               <View style={styles.content}>
                 <View style={styles.title}>
                   <H1 style={styles.h1}>
-                    Bem Vindo(a){" "}
-                    <H1 style={{ color: '#1A1423' }}>FirstMockName!</H1>
+                    Bem Vindo(a)
+                    <H1 style={{ color: "#1A1423" }}>
+                      {route.params?.firstUserName == ""
+                        ? null
+                        : ` ${route.params?.firstUserName}`}
+                      !
+                    </H1>
                   </H1>
                   <CustomText.Subtitle>
                     Agora nos diga seu
@@ -53,11 +59,17 @@ export const EmailSignUp: React.FC = () => {
                   placeholder="Email"
                   onChange={() => {}}
                   variant="emailAddress"
+                  keyboardType="email-address"
                   style={styles.input}
+                  returnKeyType="next"
                 />
 
                 <IconButton
-                  onPress={() => navigate("SigUpCPF")}
+                  onPress={() =>
+                    navigate("SigUpCPF", {
+                      firstUserName: route.params?.firstUserName,
+                    })
+                  }
                   hasShadow
                   style={styles.button}
                 >

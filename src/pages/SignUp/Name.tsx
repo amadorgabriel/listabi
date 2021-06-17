@@ -12,7 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 
 import { theme } from "../../styles/colors";
-import { AntDesign } from '@expo/vector-icons'; 
+import { AntDesign } from "@expo/vector-icons";
 
 import BottomAbstractArt from "../../assets/abstract-bottom-art.svg";
 
@@ -23,7 +23,13 @@ import { H1, Text as CustomText } from "../../components/Typografy/Index";
 
 export const NameSignUp: React.FC = () => {
   const { navigate } = useNavigation();
-  const [userName, setUserName] = useState('')
+  const [userName, setUserName] = useState("");
+
+  function stringNameTreatement(string: string) {
+    const uppercased = string.replace(/^\w/, (c) => c.toUpperCase());
+    const firstUserName = uppercased.split(" ")[0];
+    return firstUserName;
+  }
 
   return (
     <KeyboardAvoidingView
@@ -35,7 +41,7 @@ export const NameSignUp: React.FC = () => {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.inner}>
             <View style={styles.container}>
-              <Header alternativeText="Passo 1 de 4" style={styles.header}/>
+              <Header alternativeText="Passo 1 de 4" style={styles.header} />
 
               <View style={styles.content}>
                 <View style={styles.title}>
@@ -48,16 +54,21 @@ export const NameSignUp: React.FC = () => {
                 <OutlineInput
                   placeholder="Nome"
                   defaultValue={userName}
-                  onChangeText={userName => { setUserName(userName)}}
+                  onChangeText={(userName) => {
+                    setUserName(userName);
+                  }}
                   onChange={() => {}}
                   variant="name"
                   returnKeyType="next"
-
                   style={styles.input}
                 />
 
                 <IconButton
-                  onPress={() => navigate("SigUpEmail", {fullUserName: userName })}
+                  onPress={() =>
+                    navigate("SigUpEmail", {
+                      firstUserName: stringNameTreatement(userName),
+                    })
+                  }
                   hasShadow
                   style={styles.button}
                 >
@@ -78,15 +89,15 @@ export const NameSignUp: React.FC = () => {
 
 const styles = StyleSheet.create({
   inner: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    height: '100%',
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    height: "100%",
   },
   container: {
     backgroundColor: theme.colors.background,
     paddingHorizontal: 30,
-    alignItems: "center"
+    alignItems: "center",
   },
   avoidView: {
     flex: 1,
@@ -95,7 +106,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     paddingHorizontal: 0,
-    marginTop: 5
+    marginTop: 5,
   },
   content: {
     width: "100%",
@@ -116,6 +127,6 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 40,
-    alignSelf: 'flex-end'
-  }
+    alignSelf: "flex-end",
+  },
 });
