@@ -1,10 +1,13 @@
 import React from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { Home } from '../pages/Home';
-import { Extract } from '../pages/Extract'
-import { SearchProduct } from '../pages/SearchProduct'
+
 import { Login } from '../pages/Login'
+import { NameSignUp } from '../pages/SignUp/Name'
+import { EmailSignUp } from '../pages/SignUp/Email'
+import { CPFSignUp } from '../pages/SignUp/CPF'
+import { PasswordSignUp } from '../pages/SignUp/Password'
+
 
 import TabRoutes from "./tab.routes";
 
@@ -21,30 +24,34 @@ const AppRoutes: React.FC = () => {
           }
       }}
     >
-
-      {/* <stackRoutes.Screen 
-        name="Home"
-        component={Home}
-      />
-
       <stackRoutes.Screen 
-        name="Adicionar"
-        component={SearchProduct}
+        name="Main"
+        component={TabRoutes}
       />
-
-      <stackRoutes.Screen 
-        name="Extrato"
-        component={Extract}
-      /> */}
-
+      
       <stackRoutes.Screen 
         name="Login"
         component={Login}
       />
-      
+
       <stackRoutes.Screen 
-        name="Main"
-        component={TabRoutes}
+        name="SignUpName"
+        component={NameSignUp}
+      />
+
+      <stackRoutes.Screen 
+        name="SigUpEmail"
+        component={EmailSignUp}
+      />
+
+      <stackRoutes.Screen 
+        name="SigUpCPF"
+        component={CPFSignUp}
+      />
+
+      <stackRoutes.Screen 
+        name="SigUpPassword"
+        component={PasswordSignUp}
       />
 
     </stackRoutes.Navigator>

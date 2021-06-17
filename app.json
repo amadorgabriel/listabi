@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Listabi",
+    "name": "Listabi v1.2",
     "slug": "Listabi",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -8,7 +8,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#09BCBA"
+      "backgroundColor": "#10BD8D"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

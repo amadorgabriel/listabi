@@ -32,6 +32,11 @@ Text.Subtitle = styled(Text)`
   font-family: ${fonts.text};
 `
 
+Text.SubtitleBold = styled(Text)`
+  font-size: 18px;
+  font-family: ${fonts.heading};
+`
+
 Text.Medium = styled(Text)`
   font-size: 16px;
   font-family: ${fonts.display};

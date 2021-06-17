@@ -1,21 +1,17 @@
 const colors = {
   blue: "#30837F",
-  gray: "#525252",
+  gray: "#767676",
   ligth_gray: "#8F9391",
+  dark_gray: '#52665A',
+
   pink: "#F56960",
   water_green: "#09BCBA",
-  
+  green: "#10BD8D",
+  dark_purple: "#1A1423",
+
   white: "#FFFFFF",
   white_secondary: '#FBFFFE',
   transparent: "transparent",
-
-  // purple: "#511E8B",
-  // purple_light: "#6E2BBA",
-  // green_primary: "#28C313",
-  // water_green_dark: "##2C9B72",
-  // blue_dark: "#31626D",
-  // gray: "#5A818A",
-  // red: "#FF3C38",
 };
 
 export const themeColors = {
@@ -23,10 +19,15 @@ export const themeColors = {
   background: colors.white_secondary,
   transparent: colors.transparent,
 
-  button: {},
+  button: {
+    primary: colors.green,
+    secondary: colors.pink,
+    white: colors.white,
+    text: colors.dark_gray
+  },
   bottomTab: {
     background: colors.blue,
-    backgroundCustomButtom: colors.water_green,
+    backgroundCustomButtom: colors.green,
     activeTintColor: colors.white,
     inactiveTintColor: colors.white,
   },
@@ -34,17 +35,19 @@ export const themeColors = {
     primary: colors.pink,
     secondary: colors.blue
   },
-  
   typografy: {
+    display: {
+      primary: colors.dark_purple
+    },
     title: {
       primary: colors.blue
     },
     paragraph: {
       primary: colors.gray,
-      secondary: colors.ligth_gray
+      secondary: colors.ligth_gray,
+      tertiary: colors.dark_purple,
+      quartenary: colors.green
     },
   },
 };
 
-// heading: '#52665A',
-// text: '#4C524E',

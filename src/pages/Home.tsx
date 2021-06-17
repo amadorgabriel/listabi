@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { StatusBar } from "expo-status-bar";
 
 import { theme } from "../styles/colors"
 
@@ -20,6 +21,8 @@ export const Home:React.FC = () => {
         </View>
         <Card message="Que tal começar a adicionar produtos para compra?" />
       </View>
+
+      <StatusBar style="auto" />
     </SafeAreaView>
   )
 }

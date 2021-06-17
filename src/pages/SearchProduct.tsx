@@ -4,20 +4,21 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 
 import { theme } from "../styles/colors";
-import { OutlineIconInput } from "../components/Input/Index";
+import { OutlineInput } from "../components/Input/Index";
 import { H2, Text } from "../components/Typografy/Index";
 
 export const SearchProduct = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <OutlineIconInput
+      <OutlineInput
+        hasIcon
         placeholder="Pesquise por alimentos.."
         onChange={() => {}}
       />
 
       <ScrollView contentContainerStyle={styles.scrollView}>
         <View style={styles.emptyList}>
-          <Ionicons name="search-outline" size={124} color="#3a4940" />
+          <Ionicons name="search-outline" size={90} color="#3a4940" />
 
           <View>
             <H2 style={styles.textCentered}>Pesquise o que precisa</H2>
@@ -55,8 +56,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 120
-
-
-    
   }
 });
