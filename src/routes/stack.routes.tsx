@@ -4,6 +4,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Home } from '../pages/Home';
 import { Extract } from '../pages/Extract'
 import { SearchProduct } from '../pages/SearchProduct'
+import { Login } from '../pages/Login'
+
+import TabRoutes from "./tab.routes";
 
 const stackRoutes = createStackNavigator()
 
@@ -11,7 +14,7 @@ const AppRoutes: React.FC = () => {
   return (
     <stackRoutes.Navigator
       headerMode="none"
-      initialRouteName="Adicionar"
+      initialRouteName="Login"
         screenOptions={{
           cardStyle: {
             backgroundColor: '#fff'
@@ -19,7 +22,7 @@ const AppRoutes: React.FC = () => {
       }}
     >
 
-      <stackRoutes.Screen 
+      {/* <stackRoutes.Screen 
         name="Home"
         component={Home}
       />
@@ -32,6 +35,16 @@ const AppRoutes: React.FC = () => {
       <stackRoutes.Screen 
         name="Extrato"
         component={Extract}
+      /> */}
+
+      <stackRoutes.Screen 
+        name="Login"
+        component={Login}
+      />
+      
+      <stackRoutes.Screen 
+        name="Main"
+        component={TabRoutes}
       />
 
     </stackRoutes.Navigator>
