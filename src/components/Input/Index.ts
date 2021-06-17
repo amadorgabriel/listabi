@@ -1,3 +1,3 @@
-import { OutlineIconInput } from './OutlineIcon/Index'
+import { OutlineInput } from './Outline/Index'
 
-export { OutlineIconInput }
+export { OutlineInput }
