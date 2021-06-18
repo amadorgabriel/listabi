@@ -20,7 +20,7 @@ export const LabelButton: React.FC<StyledLabelButtonProps> = ({
       style={hasShadow === true && styles.boxShadow}
       {...rest}
     >
-      <TouchableButton.Label color={color}> {label} </TouchableButton.Label>
+      <TouchableButton.Label size={size} color={color}> {label} </TouchableButton.Label>
     </TouchableButton>
   );
 };

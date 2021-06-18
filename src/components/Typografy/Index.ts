@@ -27,6 +27,11 @@ export const H2 = styled(Title)`
   font-family: ${fonts.subtitle};
 `;
 
+export const H3 = styled(Title)`
+  font-size: 16px;
+  font-family: ${fonts.subtitle};
+`;
+
 Text.Subtitle = styled(Text)`
   font-size: 18px;
   font-family: ${fonts.text};
