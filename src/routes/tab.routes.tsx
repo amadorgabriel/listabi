@@ -1,19 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Platform, Keyboard, TouchableOpacity, View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
 import { Feather } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 
+//pages
 import { Home } from "../pages/Home";
 import { Extract } from "../pages/Extract";
 import { SearchProduct } from "../pages/SearchProduct";
 
+//theme
 import { theme } from "../styles/colors";
+
+//hook
+import { useProduct } from "../contexts/ProductContext";
 
 const Tab = createBottomTabNavigator();
 
-const CustomButtomComponent = ({ onPress, children}:any) => {
+const CustomButtomComponent = ({ onPress, children }: any) => {
+  const [keyboardStatus, setKeyboardStatus] = useState("");
+  const _keyboardDidShow = () => setKeyboardStatus("Keyboard Shown");
+  const _keyboardDidHide = () => setKeyboardStatus("Keyboard Hidden");
+
   useEffect(() => {
     Keyboard.addListener("keyboardDidShow", _keyboardDidShow);
     Keyboard.addListener("keyboardDidHide", _keyboardDidHide);
@@ -25,18 +33,14 @@ const CustomButtomComponent = ({ onPress, children}:any) => {
     };
   }, []);
 
-  const [keyboardStatus, setKeyboardStatus] = useState('');
-  const _keyboardDidShow = () => setKeyboardStatus("Keyboard Shown");
-  const _keyboardDidHide = () => setKeyboardStatus("Keyboard Hidden");
-
   return (
     <TouchableOpacity
       accessibilityRole="button"
       style={{
         justifyContent: "center",
         alignItems: "center",
-        paddingBottom: keyboardStatus === 'Keyboard Shown' ? 0 : 30 ,
-        display: keyboardStatus === 'Keyboard Shown' ? 'none' : 'flex'
+        paddingBottom: keyboardStatus === "Keyboard Shown" ? 0 : 30,
+        display: keyboardStatus === "Keyboard Shown" ? "none" : "flex",
       }}
       onPress={onPress}
     >
@@ -46,17 +50,23 @@ const CustomButtomComponent = ({ onPress, children}:any) => {
           width: 70,
           height: 70,
           borderRadius: 180,
-          backgroundColor:
-            theme.colors.bottomTab.backgroundCustomButtom,
+          backgroundColor: theme.colors.bottomTab.backgroundCustomButtom,
         }}
       >
         {children}
       </View>
     </TouchableOpacity>
   );
-}
+};
 
 const BottomRoutes: React.FC = () => {
+  const { modalIsActive } = useProduct();
+  const [hideTabBar, setHideTabBar] = useState(false);
+
+  useEffect(() => {
+    setHideTabBar(modalIsActive);
+  }, [modalIsActive]);
+
   return (
     <Tab.Navigator
       tabBarOptions={{
@@ -70,6 +80,7 @@ const BottomRoutes: React.FC = () => {
           paddingVertical: Platform.OS === "ios" ? 20 : 0,
           height: 70,
           backgroundColor: theme.colors.bottomTab.background,
+          display: hideTabBar === true ? "none" : "flex",
         },
       }}
     >
@@ -88,7 +99,8 @@ const BottomRoutes: React.FC = () => {
         component={SearchProduct}
         options={{
           tabBarIcon: () => <Feather name="plus" color="#FFF" size={30} />,
-          tabBarButton: ({ onPress, children }) => CustomButtomComponent({ onPress, children}) 
+          tabBarButton: ({ onPress, children }) =>
+            CustomButtomComponent({ onPress, children }),
         }}
       />
 
