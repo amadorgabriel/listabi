@@ -1,3 +1,5 @@
 import { OutlineInput } from './Outline/Index'
 
-export { OutlineInput }
+import { CounterInput } from './Counter/Index'
+
+export { OutlineInput, CounterInput }
