@@ -46,7 +46,15 @@ TouchableButton.Label = styled.Text<StyledLabelButtonProps>`
     }
   }};
 
-  font-family: ${fonts.heading};
+  font-family: ${({ size }) => {
+    switch (size) {
+      case "medium":
+        return fonts.text;
+
+      default:
+        return fonts.heading;
+    }
+  }};
 
   color: ${({ theme, color }) => {
     switch (color) {

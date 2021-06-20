@@ -33,14 +33,16 @@ export const themeColors = {
   },
   cards: {
     primary: colors.pink,
-    secondary: colors.blue
+    secondary: colors.blue,
+    tertiary: colors.green
   },
   typografy: {
     display: {
       primary: colors.dark_purple
     },
     title: {
-      primary: colors.blue
+      primary: colors.blue,
+      secondary: colors.pink
     },
     paragraph: {
       primary: colors.gray,

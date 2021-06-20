@@ -6,12 +6,45 @@ export const TouchableButton: any = styled.TouchableHighlight<StyledIconButtonPr
   display: flex;
   align-items: center;
   justify-content: center;
+  max-width: 65px;
 
   width: 100%;
-  max-width: 65px;
   height: 65px;
 
-  border-radius: 10px;
+
+  border-radius: ${({ size }) => {
+    switch (size) {
+      case "small":
+        return "5px";
+
+      default:
+        return "10px";
+    }
+  }};
+
+  width: ${({ size }) => {
+    switch (size) {
+      case "small":
+        return "54px";
+
+      default:
+        return "65px";
+    }
+  }};
+
+  height: ${({ size }) => {
+    switch (size) {
+      case "small":
+        return "28px";
+
+      case "medium":
+        return "32px";
+
+      default:
+        return "65px";
+    }
+  }};
+
   background-color: ${({ theme, color }) => {
     switch (color) {
       case "white":

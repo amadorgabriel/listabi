@@ -1,13 +1,11 @@
 import React from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
 
-
 import { Login } from '../pages/Login'
 import { NameSignUp } from '../pages/SignUp/Name'
 import { EmailSignUp } from '../pages/SignUp/Email'
 import { CPFSignUp } from '../pages/SignUp/CPF'
 import { PasswordSignUp } from '../pages/SignUp/Password'
-
 
 import TabRoutes from "./tab.routes";
 
