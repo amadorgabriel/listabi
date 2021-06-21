@@ -2,13 +2,13 @@ import React from "react";
 import { View, StyleSheet, ViewProps } from "react-native";
 
 //components
-import { H3 } from "../Typografy/Index";
-import { LabelButton } from "../Button/Index";
+import { H3 } from "../../Typografy/Index";
+import { LabelButton } from "../../Button/Index";
 import { ProductContainer, ProductImage } from "./styles";
-import CertifiedIcon from "../../assets/certified-icon.svg";
+import CertifiedIcon from "../../../assets/certified-icon.svg";
 
 //hook
-import { useProduct } from "../../contexts/ProductContext";
+import { useProduct } from "../../../contexts/ProductContext";
 
 type CertificationProduct = {
   name: string;
@@ -24,7 +24,7 @@ export interface ProductItemProps extends ViewProps {
   style?: {};
 }
 
-export const ProductItem: React.FC<ProductItemProps> = ({
+export const AddableProduct: React.FC<ProductItemProps> = ({
   title = "Carregando",
   productImage = "https://drogariaguarulhos.com.br/media/catalog/product/placeholder/default/notfound.png",
   isCertified = false,

@@ -8,7 +8,7 @@ import db from "../../server.json";
 import { theme } from "../styles/colors";
 
 //components
-import { ProductItem } from "../components/ItemProduct/Index";
+import { AddableProduct } from "../components/ItemProduct/Index";
 import { OutlineInput, CounterInput } from "../components/Input/Index";
 import { H2, H3, Text } from "../components/Typografy/Index";
 import { LabelButton } from "../components/Button/Index";
@@ -82,7 +82,7 @@ export const SearchProduct: React.FC = () => {
                 {productList.map((element: any, index) => {
                   return (
                     <Pressable key={index}>
-                      <ProductItem
+                      <AddableProduct
                         style={styles.product}
                         title={element.title}
                         productImage={element.productImage}
@@ -139,14 +139,14 @@ export const SearchProduct: React.FC = () => {
             <H3>Saiba Mais</H3>
 
             <View style={modalStyles.modalContent}>
-              {currentProduct.certifications == []? (
+              {currentProduct.certifications?.length == 0? (
                 <Card
                   variant="outlined"
                   align="left"
                   message="É uma pena.. Infelizmente esse produto não possui certificações sustentáveis"
                 />
               ) : (
-                currentProduct.certifications?.map((element: any, index) => (
+                currentProduct.certifications?.map((element: any, index:number) => (
                   <Image
                     key={index}
                     style={modalStyles.certificationImage}
