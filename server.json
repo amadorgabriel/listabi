@@ -97,5 +97,127 @@
       "quantity": 0,
       "certifications": []
     }
+  ],
+  "markets": [
+    {
+      "id": 1,
+      "title": "Super Mercado Dia",
+      "isCertified": true,
+      "latitude": -23.53503,
+      "longitude": -46.6413426,
+      "adress": "Av. Duque de Caxias, 925 - Campos Elíseos, São Paulo - SP, 01214-100",
+      "isOpened": true,
+      "isRecomended": true,
+      "stars": "★★★",
+      "avaliationsQuantity": 17
+    },
+    {
+      "id": 2,
+      "title": "Extra Super Mercado",
+      "isCertified": false,
+      "latitude": -23.5385952,
+      "longitude": -46.6451505,
+      "adress": "Av. Duque de Caxias, 388 - Campos Elíseos, São Paulo - SP, 01214-000",
+      "isOpened": true,
+      "isRecomended": false,
+      "stars": "★★★★",
+      "avaliationsQuantity": 2
+    },
+    {
+      "id": 3,
+      "title": "Pão de Açucar",
+      "isCertified": true,
+      "latitude": -23.5391515,
+      "longitude": -46.6492673,
+      "adress": "R. Conselheiro Nébias, 1039 - Campos Elíseos, São Paulo - SP, 01203-002",
+      "isOpened": true,
+      "isRecomended": true,
+      "stars": "★★★★★",
+      "avaliationsQuantity": 69
+    },
+    {
+      "id": 4,
+      "title": "Super Mercado Guanabara",
+      "isCertified": true,
+      "latitude": -23.5334096,
+      "longitude": -46.6461101,
+      "adress": "R. dos Guaianazes, 1128 - Campos Elíseos, São Paulo - SP, 01204-001",
+      "isOpened": true,
+      "isRecomended": true,
+      "stars": "★★★★★",
+      "avaliationsQuantity": 41
+    },
+    {
+      "id": 5,
+      "title": "Mercado Sonda",
+      "isCertified": false,
+      "latitude": -23.535945,
+      "longitude": -46.648056,
+      "adress": "Alameda Glete, 822 - Campos Elíseos, São Paulo - SP, 01215-001",
+      "isOpened": true,
+      "isRecomended": false,
+      "stars": "★★★★",
+      "avaliationsQuantity": 18
+    },
+    {
+      "id": 6,
+      "title": "Oba Hortifuti",
+      "isCertified": true,
+      "latitude": -23.5385477,
+      "longitude": -46.654568,
+      "adress": "Av. Angélica, 635 - Santa Cecilia, São Paulo - SP, 01227-000",
+      "isOpened": true,
+      "isRecomended": true,
+      "stars": "★★★★",
+      "avaliationsQuantity": 73
+    },
+    {
+      "id": 7,
+      "title": "Sacolão Saúde",
+      "isCertified": false,
+      "latitude": -23.5332748,
+      "longitude": -46.6537109,
+      "adress": "R. Brg. Galvão, 118 - Santa Cecilia, São Paulo - SP, 01401-901",
+      "isOpened": false,
+      "isRecomended": false,
+      "stars": "★★★★★",
+      "avaliationsQuantity": 162
+    },
+    {
+      "id": 8,
+      "title": "Mercado Uemura",
+      "isCertified": false,
+      "latitude": -23.5234091,
+      "longitude": -46.6450734,
+      "adress": "R. Jaraguá, 475 - Bom Retiro, São Paulo - SP, 01129-000",
+      "isOpened": true,
+      "isRecomended": false,
+      "stars": "★★",
+      "avaliationsQuantity": 3
+    },
+    {
+      "id": 9,
+      "title": "Mercado Bom Barato",
+      "isCertified": false,
+      "latitude": -23.5249352,
+      "longitude": -46.6551175,
+      "adress": "R. Dr. Ribeiro de Almeida, 365 - Barra Funda, São Paulo - SP, 01137-020",
+      "isOpened": true,
+      "isRecomended": false,
+      "stars": "★★★",
+      "avaliationsQuantity": 8
+    },
+    {
+      "id": 10,
+      "title": "Mini Mercado Extra",
+      "isCertified": false,
+      "latitude": -23.5440158,
+      "longitude": -46.6423795,
+      "adress": "Praça da República, 130-198 - República, São Paulo - SP",
+      "isOpened": false,
+      "isRecomended": false,
+      "stars": "★★★★",
+      "avaliationsQuantity": 64
+    }
   ]
 }
