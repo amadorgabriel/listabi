@@ -2,7 +2,7 @@
   "products": [
     {
       "id": 1,
-      "title": "Bolacha Passatempo",
+      "title": "Bolacha Nestle Passatempo",
       "productImage": "https://www.nestle.com.br/images/default-source/produtos/passatempo-biscoito-recheado-morango.png?sfvrsn=2ff70415_6",
       "isCertified": false,
       "quantity": 0,
@@ -53,7 +53,7 @@
     },
     {
       "id": 6,
-      "title": "Bolacha Maizena Bauducco",
+      "title": "Bolacha Maizena ",
       "productImage": "https://docemalu.vteximg.com.br/arquivos/ids/166169-1000-1000/102188-1.jpg?v=635826606480770000",
       "isCertified": false,
       "quantity": 0,
