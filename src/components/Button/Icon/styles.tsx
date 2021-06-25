@@ -25,7 +25,7 @@ export const TouchableButton: any = styled.TouchableHighlight<StyledIconButtonPr
   width: ${({ size }) => {
     switch (size) {
       case "small":
-        return "54px";
+        return "42px";
 
       default:
         return "65px";

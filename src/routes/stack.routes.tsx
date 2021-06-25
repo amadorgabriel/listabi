@@ -1,59 +1,47 @@
-import React from 'react';
+import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { Login } from '../pages/Login'
-import { NameSignUp } from '../pages/SignUp/Name'
-import { EmailSignUp } from '../pages/SignUp/Email'
-import { CPFSignUp } from '../pages/SignUp/CPF'
-import { PasswordSignUp } from '../pages/SignUp/Password'
+import { Login } from "../pages/Login";
+import { NameSignUp } from "../pages/SignUp/Name";
+import { EmailSignUp } from "../pages/SignUp/Email";
+import { CPFSignUp } from "../pages/SignUp/CPF";
+import { PasswordSignUp } from "../pages/SignUp/Password";
+import { SelectMarket } from "../pages/SelectMarket";
+import { PurcasheMode } from "../pages/PurcasheMode";
 
 import TabRoutes from "./tab.routes";
 
-const stackRoutes = createStackNavigator()
+const stackRoutes = createStackNavigator();
 
 const AppRoutes: React.FC = () => {
   return (
     <stackRoutes.Navigator
       headerMode="none"
       initialRouteName="Login"
-        screenOptions={{
-          cardStyle: {
-            backgroundColor: '#fff'
-          }
+      screenOptions={{
+        cardStyle: {
+          backgroundColor: "#fff",
+        },
       }}
     >
-      <stackRoutes.Screen 
-        name="Main"
-        component={TabRoutes}
-      />
-      
-      <stackRoutes.Screen 
-        name="Login"
-        component={Login}
-      />
+      <stackRoutes.Screen name="Main" component={TabRoutes} />
 
-      <stackRoutes.Screen 
-        name="SignUpName"
-        component={NameSignUp}
-      />
+      <stackRoutes.Screen name="Login" component={Login} />
 
-      <stackRoutes.Screen 
-        name="SigUpEmail"
-        component={EmailSignUp}
-      />
+      <stackRoutes.Screen name="SignUpName" component={NameSignUp} />
 
-      <stackRoutes.Screen 
-        name="SigUpCPF"
-        component={CPFSignUp}
-      />
+      <stackRoutes.Screen name="SigUpEmail" component={EmailSignUp} />
 
-      <stackRoutes.Screen 
-        name="SigUpPassword"
-        component={PasswordSignUp}
-      />
+      <stackRoutes.Screen name="SigUpCPF" component={CPFSignUp} />
+
+      <stackRoutes.Screen name="SigUpPassword" component={PasswordSignUp} />
+
+      <stackRoutes.Screen name="SelectMarket" component={SelectMarket} />
+
+      <stackRoutes.Screen name="PurcasheMode" component={PurcasheMode} />
 
     </stackRoutes.Navigator>
-  )
-}
+  );
+};
 
-export default AppRoutes
+export default AppRoutes;

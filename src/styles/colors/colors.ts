@@ -8,6 +8,7 @@ const colors = {
   water_green: "#09BCBA",
   green: "#10BD8D",
   dark_purple: "#1A1423",
+  dark: "#232323",
 
   white: "#FFFFFF",
   white_secondary: '#FBFFFE',
@@ -42,7 +43,8 @@ export const themeColors = {
     },
     title: {
       primary: colors.blue,
-      secondary: colors.pink
+      secondary: colors.pink,
+      tertiary: colors.dark
     },
     paragraph: {
       primary: colors.gray,

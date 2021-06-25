@@ -19,7 +19,8 @@ import { useProduct } from "../contexts/ProductContext";
 
 export const SearchProduct: React.FC = () => {
   const [productList, setProductList] = useState([{}]);
-  const { modalIsActive, handleModal, currentProduct } = useProduct();
+  const { modalIsActive, handleModal, currentProduct, addProductToStorage } =
+    useProduct();
   const modalizeRef = useRef<Modalize>(null);
 
   function handleSearchProduct() {
@@ -41,7 +42,6 @@ export const SearchProduct: React.FC = () => {
       handleCloseRefModal();
     }
   }, [modalIsActive]);
-
 
   return (
     <>
@@ -83,11 +83,13 @@ export const SearchProduct: React.FC = () => {
                   return (
                     <Pressable key={index}>
                       <AddableProduct
+                        id={index}
                         style={styles.product}
                         title={element.title}
                         productImage={element.productImage}
                         isCertified={element.isCertified}
                         certifications={element.certifications}
+                        quantity={0}
                       />
                     </Pressable>
                   );
@@ -130,7 +132,10 @@ export const SearchProduct: React.FC = () => {
                 size="medium"
                 label="Adicionar"
                 style={{ width: "48%" }}
-                onPress={() => {}}
+                onPress={() => {
+                  addProductToStorage();
+                  handleModal();
+                }}
               />
             </View>
           </View>
@@ -139,22 +144,24 @@ export const SearchProduct: React.FC = () => {
             <H3>Saiba Mais</H3>
 
             <View style={modalStyles.modalContent}>
-              {currentProduct.certifications?.length == 0? (
+              {currentProduct.certifications?.length == 0 ? (
                 <Card
                   variant="outlined"
                   align="left"
                   message="É uma pena.. Infelizmente esse produto não possui certificações sustentáveis"
                 />
               ) : (
-                currentProduct.certifications?.map((element: any, index:number) => (
-                  <Image
-                    key={index}
-                    style={modalStyles.certificationImage}
-                    source={{
-                      uri: element.certificateImage,
-                    }}
-                  />
-                ))
+                currentProduct.certifications?.map(
+                  (element: any, index: number) => (
+                    <Image
+                      key={index}
+                      style={modalStyles.certificationImage}
+                      source={{
+                        uri: element.certificateImage,
+                      }}
+                    />
+                  )
+                )
               )}
             </View>
           </View>
@@ -189,6 +196,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexWrap: "wrap",
     flexDirection: "row",
+    width: "100%",
     justifyContent: "space-between",
     maxWidth: 315,
     alignItems: "center",

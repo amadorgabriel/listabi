@@ -16,15 +16,17 @@ type CertificationProduct = {
 }
 
 export interface ProductItemProps extends ViewProps {
+  id: number
   title: string;
-  productImage?: string;
-  isCertified?: boolean;
-  quantity?: number;
+  productImage: string;
+  isCertified: boolean;
+  quantity: number;
   certifications: [];
   style?: {};
 }
 
 export const AddableProduct: React.FC<ProductItemProps> = ({
+  id,
   title = "Carregando",
   productImage = "https://drogariaguarulhos.com.br/media/catalog/product/placeholder/default/notfound.png",
   isCertified = false,
@@ -34,6 +36,7 @@ export const AddableProduct: React.FC<ProductItemProps> = ({
 }: ProductItemProps) => {
   const { handleModal, setCurrentProduct } = useProduct();
   const productSelected: ProductItemProps = {
+    id,
     title,
     productImage,
     isCertified,
@@ -53,7 +56,7 @@ export const AddableProduct: React.FC<ProductItemProps> = ({
       />
 
       <ProductContainer.MainContent>
-        <H3>{title}</H3>
+        <H3 numberOfLines={2} ellipsizeMode='tail' >{title}</H3>
 
         <View style={styles.actionView}>
           <LabelButton

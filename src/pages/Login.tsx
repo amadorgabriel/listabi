@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Platform,
+  Dimensions
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   topImage: {
-    width: "100%"
+    width: Dimensions.get("window").width,
   },
   account: {
     width: "100%",

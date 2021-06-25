@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, ScrollView, Pressable } from "react-native";
+import { StyleSheet, View, ScrollView, TouchableHighlight } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
@@ -13,60 +13,74 @@ import { MaterialIcons } from "@expo/vector-icons";
 //components
 import { Header } from "../components/Header/Index";
 import { Card } from "../components/Card/Index";
-import { H1, H2, H3, Text } from "../components/Typografy/Index";
-import { OutlineInput, CounterInput } from "../components/Input/Index";
+import { H1, H2, Text } from "../components/Typografy/Index";
+import { OutlineInput } from "../components/Input/Index";
+import { ProductItemList } from "../components/ItemProduct/Index";
 
 //hook
 import { useProduct } from "../contexts/ProductContext";
 
-//server
-import db from "../../server.json";
+//interface
+import { ProductItemProps } from "../components/ItemProduct/Add/Index";
 
 export const Home: React.FC = () => {
   const { navigate } = useNavigation();
 
-  const { firstProductWasAdded } = useProduct();
+  const { firstProductWasAdded, productList } = useProduct();
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <ScrollView
         contentContainerStyle={styles.srollview}
         showsVerticalScrollIndicator={false}
+        style={{ flex: 1 }}
       >
-        <Pressable>
-          <Header />
+        <Header />
 
-          {firstProductWasAdded && (
-            <View style={{ marginBottom: 30 }}>
-              <OutlineInput
-                hasIcon
-                placeholder="Pesquise por alimentos.."
-                onChange={() => {}}
-                onEndEditing={() =>
-                  navigate("Main", {
-                    screen: "Adicionar",
-                  })
-                }
-              />
-            </View>
-          )}
+        {firstProductWasAdded && (
+          <View style={{ marginBottom: 30 }}>
+            <OutlineInput
+              hasIcon
+              placeholder="Pesquise por alimentos.."
+              onChange={() => {}}
+              onEndEditing={() =>
+                navigate("Main", {
+                  screen: "Adicionar",
+                })
+              }
+            />
+          </View>
+        )}
 
-          <View style={styles.content}>
+        <View style={styles.content}>
+          <View>
+            <H1>Minha Lista</H1>
+            <Text.Subtitle>
+              {firstProductWasAdded
+                ? "Aqui está, essa é a sua lista de produtos do momento. "
+                : "Você ainda não tem nenhuma lista com produtos."}
+            </Text.Subtitle>
+          </View>
+
+          {!firstProductWasAdded ? (
+            <Card
+              style={{ marginTop: 40 }}
+              message="Que tal começar a adicionar produtos para compra?"
+            />
+          ) : (
             <View>
-              <H1>Minha Lista</H1>
-              <Text.Subtitle>
-                Você ainda não tem nenhuma lista com produtos.
-              </Text.Subtitle>
-            </View>
+              <View style={styles.novidades}>
+                <H2 style={{ fontFamily: fonts.complement }}>Novidades</H2>
 
-            {!firstProductWasAdded ? (
-              <Card message="Que tal começar a adicionar produtos para compra?" />
-            ) : (
-              <View>
-                <View style={styles.novidades}>
-                  <H2 style={{ fontFamily: fonts.complement }}>Novidades</H2>
-
-                  <View style={styles.novidadesContent}>
+                <TouchableHighlight
+                  onPress={() => {
+                    navigate("SelectMarket");
+                  }}
+                  activeOpacity={1}
+                  underlayColor={"#AAA"}
+                  style={styles.novidadesContent}
+                >
+                  <>
                     <View style={styles.novidadesTitleView}>
                       <MaterialCommunityIcons
                         name="shopping"
@@ -86,118 +100,81 @@ export const Home: React.FC = () => {
                     <Text.Subtitle style={{ color: "white", fontSize: 17 }}>
                       Ative essa funcionalidade ao ir ao mercado!
                     </Text.Subtitle>
+                  </>
+                </TouchableHighlight>
+              </View>
+
+              <View style={styles.produtos}>
+                <H2 style={{ fontFamily: fonts.complement }}>Seus Produtos</H2>
+
+                <View style={styles.controleCompra}>
+                  <MaterialIcons
+                    name="info"
+                    size={28}
+                    color="white"
+                    style={{
+                      marginRight: 10,
+                    }}
+                  />
+                  <View>
+                    <Text.Subtitle
+                      style={{
+                        color: "white",
+                        fontFamily: fonts.complement,
+                        fontSize: 16,
+                      }}
+                    >
+                      Controle sua compra
+                    </Text.Subtitle>
+
+                    <Text.Subtitle style={{ color: "white", fontSize: 14 }}>
+                      {productList.length == 0
+                        ? "Você ainda não adicionou nenhum produto a lista."
+                        : productList.length == 1
+                        ? "Você tem 1 item."
+                        : `Você tem ${productList.length} itens.`}
+                    </Text.Subtitle>
                   </View>
                 </View>
 
-                <View style={styles.produtos}>
-                  <H2 style={{ fontFamily: fonts.complement }}>
-                    Seus Produtos
-                  </H2>
-
-                  <View style={styles.controleCompra}>
-                    <MaterialIcons
-                      name="info"
-                      size={28}
-                      color="white"
-                      style={{
-                        marginRight: 10,
-                      }}
-                    />
-                    <View>
-                      <Text.Subtitle
-                        style={{
-                          color: "white",
-                          fontFamily: fonts.complement,
-                          fontSize: 16,
-                        }}
-                      >
-                        Controle sua compra
-                      </Text.Subtitle>
-
-                      <Text.Subtitle style={{ color: "white", fontSize: 14 }}>
-                        XX itens e XX produtos
-                      </Text.Subtitle>
-                    </View>
-                  </View>
-
-                  <View style={styles.controleCompra}>
-                    <MaterialIcons
-                      name="info"
-                      size={28}
-                      color="white"
-                      style={{
-                        marginRight: 10,
-                      }}
-                    />
-                    <View>
-                      <Text.Subtitle
-                        style={{
-                          color: "white",
-                          fontFamily: fonts.complement,
-                          fontSize: 16,
-                        }}
-                      >
-                        Controle sua compra
-                      </Text.Subtitle>
-
-                      <Text.Subtitle style={{ color: "white", fontSize: 14 }}>
-                        XX itens e XX produtos
-                      </Text.Subtitle>
-                    </View>
-                  </View>
-
-                  <View style={styles.controleCompra}>
-                    <MaterialIcons
-                      name="info"
-                      size={28}
-                      color="white"
-                      style={{
-                        marginRight: 10,
-                      }}
-                    />
-                    <View>
-                      <Text.Subtitle
-                        style={{
-                          color: "white",
-                          fontFamily: fonts.complement,
-                          fontSize: 16,
-                        }}
-                      >
-                        Controle sua compra
-                      </Text.Subtitle>
-
-                      <Text.Subtitle style={{ color: "white", fontSize: 14 }}>
-                        XX itens e XX produtos
-                      </Text.Subtitle>
-                    </View>
-                  </View>
-
-                  <View style={styles.productList}></View>
+                <View style={styles.productList}>
+                  {productList.length != 0 &&
+                    productList.map(
+                      (product: ProductItemProps, index: number) => (
+                        <ProductItemList
+                          key={index}
+                          id={index}
+                          title={product.title}
+                          productImage={product.productImage}
+                          variant="default"
+                          quantity={product.quantity}
+                        />
+                      )
+                    )}
                 </View>
               </View>
-            )}
-          </View>
-        </Pressable>
+            </View>
+          )}
+        </View>
+        <StatusBar style="auto" />
       </ScrollView>
-
-      <StatusBar style="auto" />
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: theme.colors.background,
     flex: 1,
+    backgroundColor: theme.colors.background,
   },
   srollview: {
-    width: "100%",
-    height: "100%",
     paddingHorizontal: 30,
-    alignItems: "center",
+    paddingBottom: 40,
+    // alignItems: "center",
+    flexGrow: 1,
   },
   content: {
-    height: 210,
+    // height: 210,
     justifyContent: "space-between",
   },
   novidades: {
@@ -229,5 +206,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  productList: {},
+  productList: {
+    marginTop: 10,
+  },
 });

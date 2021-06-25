@@ -1,25 +1,37 @@
 import styled from 'styled-components/native'
 
 export const ProductImage = styled.Image`
-  width: 130px;
-  height: 130px;
+  width: 80px;
+  height: 80px;
+  margin-right: 10px;
 `
 
 export const ProductContainer:any = styled.View`
   width: 100%;
-  max-width: 150px;
-  min-height: 230px;
-  border: 1px solid ${({theme, isCertified}) => isCertified === true ? theme.colors.cards.secondary : theme.colors.cards.primary };
+ 
+  border: 1px solid ${({theme}) => theme.colors.cards.secondary };
   border-radius: 12px;
   padding: 10px;
+  margin-top: 10px;
 
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 `
 
 ProductContainer.MainContent = styled.View`
+  height: 100%;
+  flex: 1;
   display: flex;
-  flex-direction: column;
-  width: 100%;
-
+  flex-direction: row;
+  justify-content: space-between;
 `
+
+ProductContainer.MainContentTitle = styled.View`
+  align-items: center;
+`
+
+ProductContainer.MainContentClose = styled.Pressable`
+  width: 20px;
+  height: 20px;
+`
+

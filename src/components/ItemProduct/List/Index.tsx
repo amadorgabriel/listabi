@@ -1,28 +1,34 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Pressable } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 //components
 import { Text } from "../../Typografy/Index";
 import { CounterInput } from "../../Input/Index";
 import { ProductContainer, ProductImage } from "./styles";
-import CertifiedIcon from "../../../assets/certified-icon.svg";
 
-import { Ionicons } from "@expo/vector-icons";
+//hook
+import { useProduct } from "../../../contexts/ProductContext";
 
 export interface ProductItemListProps {
+  id: number;
   title: string;
-  productImage?: string;
-  quantity?: number;
-  variant: "checkable" | "default";
+  productImage: string;
+  quantity: number;
+  variant?: "checkable" | "default";
   style?: {};
 }
 
 export const ProductItemList: React.FC<ProductItemListProps> = ({
-  title = "Carregando",
-  productImage = "https://drogariaguarulhos.com.br/media/catalog/product/placeholder/default/notfound.png",
+  id,
+  title,
+  productImage,
   quantity = 0,
+  variant = "default",
   style,
 }) => {
+  const { deleteProductFromStorage } = useProduct();
+
   return (
     <ProductContainer style={style}>
       <ProductImage
@@ -33,15 +39,22 @@ export const ProductItemList: React.FC<ProductItemListProps> = ({
           uri: productImage,
         }}
       />
-      <ProductContainer.MainContent>
-        <View>
-          <Text.Medium>{title}</Text.Medium>
-          <CounterInput />
-        </View>
 
-        <View>
-          <Ionicons name="close" size={24} color="black" />
-        </View>
+      <ProductContainer.MainContent>
+        <ProductContainer.MainContentTitle>
+          <Text.Medium style={{ maxWidth: 165, marginBottom: 5 }}>
+            {title}
+          </Text.Medium>
+          <CounterInput style={{ alignSelf: "flex-start" }} />
+        </ProductContainer.MainContentTitle>
+
+        <ProductContainer.MainContentClose
+          onPress={() => {
+            // deleteProductFromStorage(id);
+          }}
+        >
+          <Ionicons name="close" size={20} color="black" />
+        </ProductContainer.MainContentClose>
       </ProductContainer.MainContent>
     </ProductContainer>
   );

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Listabi v1.3",
+    "name": "Listabi v1.5",
     "slug": "Listabi",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -24,7 +24,7 @@
       "package": "com.listabi.listabi",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#FFFFFF" 
       }
     },
     "web": {

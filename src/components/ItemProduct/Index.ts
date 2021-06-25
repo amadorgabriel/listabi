@@ -1,3 +1,5 @@
 import { AddableProduct } from './Add/Index'
 
-export { AddableProduct }
+import { ProductItemList } from './List/Index'
+
+export { AddableProduct, ProductItemList }

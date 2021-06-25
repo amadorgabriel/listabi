@@ -17,6 +17,7 @@ interface ProductContextData {
   handleModal: (closeModal?: boolean) => void;
   setCurrentProduct: (currentProduct: ProductItemProps) => void;
   addProductToStorage: () => void;
+  deleteProductFromStorage: (id: number) => void;
 }
 
 interface ProductContextProviderProps {
@@ -48,13 +49,20 @@ export function ProductContextProvider({
         await AsyncStorage.getItem("@firstProductWasAdded")
       );
 
-      const itemList = await AsyncStorage.getItem("@myProductList");
-
-      if (firstProduct == null || firstProduct == undefined) {
+      if (
+        productList == null ||
+        productList == undefined ||
+        productList[0].title == undefined
+      ) {
         await AsyncStorage.setItem("@firstProductWasAdded", "false");
         setFirstProductWasAdded(false);
-      } else if (firstProduct == false || itemList != null) {
-        await AsyncStorage.setItem("@firstProductWasAdded", "true");
+
+        console.log(firstProduct)
+        if(firstProduct ){
+          setFirstProductWasAdded(true);
+        }
+
+      } else {
         setFirstProductWasAdded(true);
       }
     } catch (error) {
@@ -65,14 +73,21 @@ export function ProductContextProvider({
   async function addProductToStorage() {
     try {
       //checka se o estado inicial da lista de produtos é um obj vazio
-      if(productList.length == 1 && !firstProductWasAdded ){
-        setProductList([currentProduct]);
-      }else{
-        setProductList([...productList, currentProduct]);
-      }
-      
-      setFirstProductWasAddedToStorage();
+      let newCurrentProduct = currentProduct;
 
+      if (Object.keys(productList[0]).length === 0) {
+        newCurrentProduct.id = productList.length;
+        setProductList([newCurrentProduct]);
+      } else {
+        newCurrentProduct.id = productList.length + 1;
+        setProductList([...productList, newCurrentProduct]);
+      }
+
+      //seta firstProductWasAdded como adicionado
+      await AsyncStorage.setItem("@firstProductWasAdded", "true");
+      setFirstProductWasAdded(true);
+
+      //adiciona o produto
       const jsonProduct = JSON.stringify([...productList, currentProduct]);
       await AsyncStorage.setItem("@myProductList", jsonProduct);
     } catch (error) {
@@ -82,7 +97,9 @@ export function ProductContextProvider({
 
   async function getProductListStorage() {
     try {
-      // await AsyncStorage.clear();
+      await AsyncStorage.clear();
+
+      setFirstProductWasAddedToStorage();
 
       const jsonValue = await AsyncStorage.getItem("@myProductList");
 
@@ -92,6 +109,32 @@ export function ProductContextProvider({
     } catch (error) {
       throw new Error();
     }
+  }
+
+  async function deleteProductFromStorage(id: number) {
+    let deleteObject = {};
+    let newList = productList;
+
+    
+    productList.map((element: ProductItemProps, index: number) => {
+      if (element.id == currentProduct.id) {
+        deleteObject = element;
+        setProductList(newList.splice(index, 1));
+        
+        console.log(productList)
+
+        productList.map((element: ProductItemProps, index: number) => {
+          let newCurrentProduct = element;
+          newCurrentProduct.id = index
+          let listWithNewId = [] as any[] 
+          listWithNewId = ([...listWithNewId, newCurrentProduct])
+          
+          console.log(listWithNewId)
+          setProductList(listWithNewId);
+        })
+         
+      }
+    });
   }
 
   useEffect(() => {
@@ -109,6 +152,7 @@ export function ProductContextProvider({
         firstProductWasAdded,
         addProductToStorage,
         productList,
+        deleteProductFromStorage,
       }}
     >
       {children}
