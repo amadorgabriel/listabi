@@ -13,10 +13,10 @@ import { useProduct } from "../../../contexts/ProductContext";
 type CertificationProduct = {
   name: string;
   certificateImage?: string;
-}
+};
 
 export interface ProductItemProps extends ViewProps {
-  id: number
+  id: number;
   title: string;
   productImage: string;
   isCertified: boolean;
@@ -56,13 +56,17 @@ export const AddableProduct: React.FC<ProductItemProps> = ({
       />
 
       <ProductContainer.MainContent>
-        <H3 numberOfLines={2} ellipsizeMode='tail' >{title}</H3>
+        <H3 numberOfLines={2} ellipsizeMode="tail">
+          {title}
+        </H3>
 
         <View style={styles.actionView}>
           <LabelButton
             size="small"
             label="Adicionar"
-            onPress={() => { handleModal(), setCurrentProduct(productSelected)  }}
+            onPress={() => {
+              handleModal(), setCurrentProduct(productSelected);
+            }}
             style={styles.button}
           />
 

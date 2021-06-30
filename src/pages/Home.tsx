@@ -143,7 +143,7 @@ export const Home: React.FC = () => {
                       (product: ProductItemProps, index: number) => (
                         <ProductItemList
                           key={index}
-                          id={index}
+                          id={product.id}
                           title={product.title}
                           productImage={product.productImage}
                           variant="default"

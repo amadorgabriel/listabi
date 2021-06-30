@@ -1,5 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
-import { StyleSheet, ScrollView, View, Pressable, Image } from "react-native";
+import {
+  StyleSheet,
+  ScrollView,
+  View,
+  Pressable,
+  Image,
+  ToastAndroid,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { Modalize } from "react-native-modalize";
@@ -19,12 +26,15 @@ import { useProduct } from "../contexts/ProductContext";
 
 export const SearchProduct: React.FC = () => {
   const [productList, setProductList] = useState([{}]);
-  const { modalIsActive, handleModal, currentProduct, addProductToStorage } =
-    useProduct();
+  const { modalIsActive, handleModal, currentProduct, addProductToStorage } = useProduct();
   const modalizeRef = useRef<Modalize>(null);
 
   function handleSearchProduct() {
     setProductList(db.products);
+  }
+
+  function showToast() {
+    ToastAndroid.show('Adicionado!', ToastAndroid.SHORT);
   }
 
   function handleOpenRefModal() {
@@ -83,7 +93,7 @@ export const SearchProduct: React.FC = () => {
                   return (
                     <Pressable key={index}>
                       <AddableProduct
-                        id={index}
+                        id={index + 1}
                         style={styles.product}
                         title={element.title}
                         productImage={element.productImage}
@@ -99,8 +109,10 @@ export const SearchProduct: React.FC = () => {
           )}
         </View>
       </SafeAreaView>
+
       <Modalize
-        snapPoint={380}
+        // modalHeight={380}
+        adjustToContentHeight
         ref={modalizeRef}
         onClose={() => handleModal(true)}
       >
@@ -126,7 +138,9 @@ export const SearchProduct: React.FC = () => {
                 label="Esquecer"
                 style={{ width: "48%", marginRight: 10 }}
                 color="secondary"
-                onPress={() => {}}
+                onPress={() => {
+                  handleModal();
+                }}
               />
               <LabelButton
                 size="medium"
@@ -135,6 +149,7 @@ export const SearchProduct: React.FC = () => {
                 onPress={() => {
                   addProductToStorage();
                   handleModal();
+                  showToast();
                 }}
               />
             </View>

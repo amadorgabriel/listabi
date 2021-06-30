@@ -31,7 +31,7 @@ export function ProductContextProvider({
 }: ProductContextProviderProps) {
   const [modalIsActive, setModalIsActive] = useState(false);
   const [currentProduct, setCurrentProduct] = useState({} as ProductItemProps);
-  const [productList, setProductList] = useState([{} as ProductItemProps]);
+  const [productList, setProductList] = useState([] as ProductItemProps[]);
 
   const [firstProductWasAdded, setFirstProductWasAdded] = useState(false);
 
@@ -50,18 +50,15 @@ export function ProductContextProvider({
       );
 
       if (
-        productList == null ||
-        productList == undefined ||
-        productList[0].title == undefined
+        productList[0] == undefined ||
+        firstProduct === false ||
+        firstProduct === null
       ) {
         await AsyncStorage.setItem("@firstProductWasAdded", "false");
         setFirstProductWasAdded(false);
 
-        console.log(firstProduct)
-        if(firstProduct ){
-          setFirstProductWasAdded(true);
-        }
-
+      } else if (firstProduct === true) {
+        setFirstProductWasAdded(true);
       } else {
         setFirstProductWasAdded(true);
       }
@@ -72,23 +69,19 @@ export function ProductContextProvider({
 
   async function addProductToStorage() {
     try {
-      //checka se o estado inicial da lista de produtos é um obj vazio
+      //sobrescreve um novo id
       let newCurrentProduct = currentProduct;
+      newCurrentProduct.id = productList.length;
+      setProductList([...productList, newCurrentProduct]);
 
-      if (Object.keys(productList[0]).length === 0) {
-        newCurrentProduct.id = productList.length;
-        setProductList([newCurrentProduct]);
-      } else {
-        newCurrentProduct.id = productList.length + 1;
-        setProductList([...productList, newCurrentProduct]);
-      }
+      console.log("Ao adicionar: " +  newCurrentProduct.id);
 
       //seta firstProductWasAdded como adicionado
       await AsyncStorage.setItem("@firstProductWasAdded", "true");
       setFirstProductWasAdded(true);
 
       //adiciona o produto
-      const jsonProduct = JSON.stringify([...productList, currentProduct]);
+      const jsonProduct = JSON.stringify([...productList, newCurrentProduct]);
       await AsyncStorage.setItem("@myProductList", jsonProduct);
     } catch (error) {
       throw new Error();
@@ -112,33 +105,43 @@ export function ProductContextProvider({
   }
 
   async function deleteProductFromStorage(id: number) {
-    let deleteObject = {};
-    let newList = productList;
-
+    let listWithNewId = [] as ProductItemProps[];
     
-    productList.map((element: ProductItemProps, index: number) => {
-      if (element.id == currentProduct.id) {
-        deleteObject = element;
-        setProductList(newList.splice(index, 1));
+    productList.map((element: ProductItemProps) => {
+      
+      if (element.id === id) {
+        console.log("Elemento para deletar:" +  element.id);
+        let newList
         
-        console.log(productList)
+        //remove o item
+        newList = productList.filter((product: ProductItemProps) => {
+          if (product.id != element.id) {
+            return product;
+          }
+        });
 
-        productList.map((element: ProductItemProps, index: number) => {
-          let newCurrentProduct = element;
-          newCurrentProduct.id = index
-          let listWithNewId = [] as any[] 
-          listWithNewId = ([...listWithNewId, newCurrentProduct])
-          
-          console.log(listWithNewId)
-          setProductList(listWithNewId);
-        })
-         
+        console.log("Nova lista:" +  newList );
+        //atualiza o id
+        // newList.map((newItem: ProductItemProps, index: number) => {
+        //   let newCurrentProduct = newItem;
+        //   newCurrentProduct.id = index;
+        //   listWithNewId = [...listWithNewId, newCurrentProduct];
+        // });
       }
     });
+    
+    console.log("------------------------" );
+    // console.log("Nova Lista: " +  listWithNewId );
+    setProductList(listWithNewId);
+
+    //seta no storage
+    const jsonList = JSON.stringify(listWithNewId);
+    await AsyncStorage.setItem("@myProductList", jsonList);
+
+    // console.log(listWithNewId);
   }
 
   useEffect(() => {
-    //atualiza o estado inicial da lista com os dados já existentes no async storage
     getProductListStorage();
   }, []);
 

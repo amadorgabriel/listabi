@@ -50,7 +50,7 @@ export const ProductItemList: React.FC<ProductItemListProps> = ({
 
         <ProductContainer.MainContentClose
           onPress={() => {
-            // deleteProductFromStorage(id);
+            deleteProductFromStorage(id);
           }}
         >
           <Ionicons name="close" size={20} color="black" />

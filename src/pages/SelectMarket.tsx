@@ -104,8 +104,8 @@ export const SelectMarket: React.FC = () => {
                 setCurrentMarket(marker);
               }}
               coordinate={{
-                latitude: marker.latitude,
-                longitude: marker.longitude,
+                latitude: Number(marker.latitude),
+                longitude: Number(marker.longitude),
               }}
               description={
                 marker.isOpened
