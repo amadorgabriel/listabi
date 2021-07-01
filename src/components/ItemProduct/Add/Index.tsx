@@ -11,6 +11,7 @@ import CertifiedIcon from "../../../assets/certified-icon.svg";
 import { useProduct } from "../../../contexts/ProductContext";
 
 type CertificationProduct = {
+  id: number;
   name: string;
   certificateImage?: string;
 };
@@ -21,7 +22,7 @@ export interface ProductItemProps extends ViewProps {
   productImage: string;
   isCertified: boolean;
   quantity: number;
-  certifications: [];
+  certifications: CertificationProduct[];
   style?: {};
 }
 

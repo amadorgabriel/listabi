@@ -6,9 +6,11 @@ import {
   Pressable,
   Image,
   ToastAndroid,
+  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
+import * as Linking from "expo-linking";
 import { Modalize } from "react-native-modalize";
 
 import db from "../../server.json";
@@ -26,15 +28,42 @@ import { useProduct } from "../contexts/ProductContext";
 
 export const SearchProduct: React.FC = () => {
   const [productList, setProductList] = useState([{}]);
-  const { modalIsActive, handleModal, currentProduct, addProductToStorage } = useProduct();
+  const { modalIsActive, handleModal, currentProduct, addProductToStorage } =
+    useProduct();
   const modalizeRef = useRef<Modalize>(null);
 
   function handleSearchProduct() {
     setProductList(db.products);
   }
 
+  function handleAlertWebNavigation(certificationName: string) {
+    Alert.alert(
+      "Quer sair e entrar na página?",
+      "É só dizer que nós te mandamos para página da certificação!",
+      [
+        {
+          text: "Depois",
+          style: "cancel",
+        },
+        {
+          text: "Sim",
+          onPress: () => {
+            Linking.openURL(
+              certificationName === "Empresa B"
+                ? "https://www.sistemabbrasil.org/"
+                : "https://www.organicosdobrasil.com/"
+            );
+          },
+        },
+      ],
+      {
+        cancelable: true,
+      }
+    );
+  }
+
   function showToast() {
-    ToastAndroid.show('Adicionado!', ToastAndroid.SHORT);
+    ToastAndroid.show("Adicionado!", ToastAndroid.SHORT);
   }
 
   function handleOpenRefModal() {
@@ -168,13 +197,19 @@ export const SearchProduct: React.FC = () => {
               ) : (
                 currentProduct.certifications?.map(
                   (element: any, index: number) => (
-                    <Image
-                      key={index}
-                      style={modalStyles.certificationImage}
-                      source={{
-                        uri: element.certificateImage,
+                    <Pressable
+                      onPress={() => {
+                        handleAlertWebNavigation(element.name);
                       }}
-                    />
+                      key={index}
+                    >
+                      <Image
+                        style={modalStyles.certificationImage}
+                        source={{
+                          uri: element.certificateImage,
+                        }}
+                      />
+                    </Pressable>
                   )
                 )
               )}
@@ -231,6 +266,7 @@ const modalStyles = StyleSheet.create({
     width: "100%",
     paddingHorizontal: 20,
     marginTop: 15,
+    marginBottom: 15,
   },
   center: {
     display: "flex",
@@ -273,5 +309,16 @@ const modalStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     width: "100%",
+  },
+  modal: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.5)",
+  },
+  modalContainer: {
+    backgroundColor: "white",
+    width: "90%",
+    height: "90%",
   },
 });
