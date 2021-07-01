@@ -25,7 +25,7 @@ export const Header = ({ alternativeText,  style, ...rest}: HeaderProps) => {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
-      marginTop: 25,
+      marginTop: 15,
       marginBottom: 35,
       ...style
     },

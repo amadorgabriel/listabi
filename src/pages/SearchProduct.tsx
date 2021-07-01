@@ -107,7 +107,7 @@ export const SearchProduct: React.FC = () => {
             </View>
           ) : (
             <ScrollView
-              contentContainerStyle={{ width: "100%", paddingBottom: 40 }}
+              contentContainerStyle={{ width: "100%", paddingBottom: 130 }}
               showsVerticalScrollIndicator={false}
             >
               <View style={styles.title}>
@@ -140,7 +140,6 @@ export const SearchProduct: React.FC = () => {
       </SafeAreaView>
 
       <Modalize
-        // modalHeight={380}
         adjustToContentHeight
         ref={modalizeRef}
         onClose={() => handleModal(true)}

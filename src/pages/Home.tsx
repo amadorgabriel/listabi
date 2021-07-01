@@ -156,7 +156,7 @@ export const Home: React.FC = () => {
             </View>
           )}
         </View>
-        <StatusBar style="auto" />
+        <StatusBar style="auto" backgroundColor="#F9F9F9"  />
       </ScrollView>
     </SafeAreaView>
   );
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
   },
   srollview: {
     paddingHorizontal: 30,
-    paddingBottom: 40,
+    paddingBottom: 130,
     // alignItems: "center",
     flexGrow: 1,
   },
