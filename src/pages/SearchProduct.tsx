@@ -28,7 +28,7 @@ import { useProduct } from "../contexts/ProductContext";
 
 export const SearchProduct: React.FC = () => {
   const [productList, setProductList] = useState([{}]);
-  const { modalIsActive, handleModal, currentProduct, addProductToStorage } =
+  const { modalIsActive, handleModal, currentProduct, addProductToStorage, setCurrentProduct } =
     useProduct();
   const modalizeRef = useRef<Modalize>(null);
 
@@ -120,7 +120,7 @@ export const SearchProduct: React.FC = () => {
               <View style={styles.contentList}>
                 {productList.map((element: any, index) => {
                   return (
-                    <Pressable key={index}>
+                    <Pressable key={index} >
                       <AddableProduct
                         id={index + 1}
                         style={styles.product}
@@ -128,7 +128,7 @@ export const SearchProduct: React.FC = () => {
                         productImage={element.productImage}
                         isCertified={element.isCertified}
                         certifications={element.certifications}
-                        quantity={0}
+                        quantity={1}
                       />
                     </Pressable>
                   );
@@ -303,6 +303,7 @@ const modalStyles = StyleSheet.create({
   },
   modalContent: {
     marginTop: 15,
+    marginBottom: 10,
     display: "flex",
     flexDirection: "row",
     alignItems: "center",

@@ -17,7 +17,8 @@ interface ProductContextData {
   handleModal: (closeModal?: boolean) => void;
   setCurrentProduct: (currentProduct: ProductItemProps) => void;
   addProductToStorage: () => void;
-  deleteProductFromStorage: (id: number) => void;
+  deleteProductById: (id: number) => void;
+  updateProductById: (id: number, product: ProductItemProps ) => void;
 }
 
 interface ProductContextProviderProps {
@@ -49,16 +50,9 @@ export function ProductContextProvider({
         await AsyncStorage.getItem("@firstProductWasAdded")
       );
 
-      if (
-        productList[0] == undefined ||
-        firstProduct === false ||
-        firstProduct === null
-      ) {
+      if (firstProduct === false || firstProduct === null) {
         await AsyncStorage.setItem("@firstProductWasAdded", "false");
         setFirstProductWasAdded(false);
-
-      } else if (firstProduct === true) {
-        setFirstProductWasAdded(true);
       } else {
         setFirstProductWasAdded(true);
       }
@@ -74,7 +68,7 @@ export function ProductContextProvider({
       newCurrentProduct.id = productList.length;
       setProductList([...productList, newCurrentProduct]);
 
-      console.log("Ao adicionar: " +  newCurrentProduct.id);
+      console.log("Ao adicionar quantity: " + newCurrentProduct.quantity);
 
       //seta firstProductWasAdded como adicionado
       await AsyncStorage.setItem("@firstProductWasAdded", "true");
@@ -88,9 +82,9 @@ export function ProductContextProvider({
     }
   }
 
-  async function getProductListStorage() {
+  async function setProductFromStorageOnState() {
     try {
-      await AsyncStorage.clear();
+      // await AsyncStorage.clear();
 
       setFirstProductWasAddedToStorage();
 
@@ -104,15 +98,17 @@ export function ProductContextProvider({
     }
   }
 
-  async function deleteProductFromStorage(id: number) {
+  async function deleteProductById(id: number) {
     let listWithNewId = [] as ProductItemProps[];
-    
-    productList.map((element: ProductItemProps) => {
-      
+
+    await setProductFromStorageOnState();
+
+    for (let index = 0; index < productList.length; index++) {
+      const element = productList[index] as ProductItemProps;
+
       if (element.id === id) {
-        console.log("Elemento para deletar:" +  element.id);
-        let newList
-        
+        let newList;
+
         //remove o item
         newList = productList.filter((product: ProductItemProps) => {
           if (product.id != element.id) {
@@ -120,29 +116,64 @@ export function ProductContextProvider({
           }
         });
 
-        console.log("Nova lista:" +  newList );
         //atualiza o id
-        // newList.map((newItem: ProductItemProps, index: number) => {
-        //   let newCurrentProduct = newItem;
-        //   newCurrentProduct.id = index;
-        //   listWithNewId = [...listWithNewId, newCurrentProduct];
-        // });
+        newList.map((newItem: ProductItemProps, index: number) => {
+          newItem.id = index;
+          listWithNewId.push(newItem);
+        });
+
+        break;
       }
-    });
-    
-    console.log("------------------------" );
-    // console.log("Nova Lista: " +  listWithNewId );
+    }
+
     setProductList(listWithNewId);
 
     //seta no storage
     const jsonList = JSON.stringify(listWithNewId);
     await AsyncStorage.setItem("@myProductList", jsonList);
+  }
 
-    // console.log(listWithNewId);
+  async function updateProductById(id: number, product: ProductItemProps){
+    await setProductFromStorageOnState();
+    
+    for (let index = 0; index < productList.length; index++) {
+      const element = productList[index] as ProductItemProps;
+
+      if (element.id === id) {
+        let newList = [] as ProductItemProps[];
+        
+        const updatedProduct: ProductItemProps = {
+          id: product.id,
+          title: product.title,
+          quantity: product.quantity,
+          productImage: product.productImage,
+          isCertified: product.isCertified,
+          certifications: product.certifications
+        }
+               
+        //insere o produto numa nova lista - imutabilidade
+        productList.map((productItem: ProductItemProps) => {
+          if (productItem.id !== updatedProduct.id) {
+            newList.push(productItem);
+          }else{
+            newList.push(updatedProduct) ;
+          }
+        });
+
+        setProductList(newList);
+
+        //seta no storage
+        const jsonList = JSON.stringify(newList);
+        await AsyncStorage.setItem("@myProductList", jsonList);
+
+        break;
+      }
+    }
+
   }
 
   useEffect(() => {
-    getProductListStorage();
+    setProductFromStorageOnState();
   }, []);
 
   return (
@@ -155,7 +186,8 @@ export function ProductContextProvider({
         firstProductWasAdded,
         addProductToStorage,
         productList,
-        deleteProductFromStorage,
+        deleteProductById,
+        updateProductById
       }}
     >
       {children}

@@ -10,7 +10,7 @@ import CertifiedIcon from "../../../assets/certified-icon.svg";
 //hook
 import { useProduct } from "../../../contexts/ProductContext";
 
-type CertificationProduct = {
+export type CertificationProduct = {
   id: number;
   name: string;
   certificateImage?: string;
@@ -31,7 +31,7 @@ export const AddableProduct: React.FC<ProductItemProps> = ({
   title = "Carregando",
   productImage = "https://drogariaguarulhos.com.br/media/catalog/product/placeholder/default/notfound.png",
   isCertified = false,
-  quantity = 0,
+  quantity = 1,
   certifications = [],
   style,
 }: ProductItemProps) => {
