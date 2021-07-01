@@ -13,7 +13,7 @@ export const Extract = () => {
         <MaterialIcons name="info-outline" size={90} color="#30837F" />
 
         <View>
-          <H2 style={styles.textCentered}>Histórico de </H2>
+          <H2 style={styles.textCentered}>Histórico de Compras</H2>
           <Text.Medium style={styles.textCentered}>
             Infelizmente sua lista está vazia. Aqui você acessa todos os seus
             últimos produtos comprados, então adicione novidades a sua lista!.

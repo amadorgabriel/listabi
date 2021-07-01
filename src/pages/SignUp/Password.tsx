@@ -11,11 +11,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 
+//utils
 import { theme } from "../../styles/colors";
-import { AntDesign } from "@expo/vector-icons";
-
 import BottomAbstractArt from "../../assets/abstract-bottom-art.svg";
 
+//comopnents
 import { Header } from "../../components/Header/Index";
 import { LabelButton } from "../../components/Button/Index";
 import { OutlineInput } from "../../components/Input/Index";

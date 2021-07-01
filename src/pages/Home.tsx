@@ -69,40 +69,45 @@ export const Home: React.FC = () => {
             />
           ) : (
             <View>
-              <View style={styles.novidades}>
-                <H2 style={{ fontFamily: fonts.complement }}>Novidades</H2>
+              {productList.length != 0 && (
+                <View style={styles.novidades}>
+                  <H2 style={{ fontFamily: fonts.complement }}>Novidades</H2>
 
-                <TouchableHighlight
-                  onPress={() => {
-                    navigate("SelectMarket");
-                  }}
-                  activeOpacity={1}
-                  underlayColor={"#AAA"}
-                  style={styles.novidadesContent}
-                >
-                  <>
-                    <View style={styles.novidadesTitleView}>
-                      <MaterialCommunityIcons
-                        name="shopping"
-                        size={28}
-                        color="white"
-                        style={{
-                          marginRight: 10,
-                        }}
-                      />
-                      <H2
-                        style={{ color: "white", fontFamily: fonts.complement }}
-                      >
-                        Vamos as Compras?
-                      </H2>
-                    </View>
+                  <TouchableHighlight
+                    onPress={() => {
+                      navigate("SelectMarket");
+                    }}
+                    activeOpacity={1}
+                    underlayColor={"#AAA"}
+                    style={styles.novidadesContent}
+                  >
+                    <>
+                      <View style={styles.novidadesTitleView}>
+                        <MaterialCommunityIcons
+                          name="shopping"
+                          size={28}
+                          color="white"
+                          style={{
+                            marginRight: 10,
+                          }}
+                        />
+                        <H2
+                          style={{
+                            color: "white",
+                            fontFamily: fonts.complement,
+                          }}
+                        >
+                          Vamos as Compras?
+                        </H2>
+                      </View>
 
-                    <Text.Subtitle style={{ color: "white", fontSize: 17 }}>
-                      Ative essa funcionalidade ao ir ao mercado!
-                    </Text.Subtitle>
-                  </>
-                </TouchableHighlight>
-              </View>
+                      <Text.Subtitle style={{ color: "white", fontSize: 17 }}>
+                        Ative essa funcionalidade ao ir ao mercado!
+                      </Text.Subtitle>
+                    </>
+                  </TouchableHighlight>
+                </View>
+              )}
 
               <View style={styles.produtos}>
                 <H2 style={{ fontFamily: fonts.complement }}>Seus Produtos</H2>
@@ -172,11 +177,9 @@ const styles = StyleSheet.create({
   srollview: {
     paddingHorizontal: 30,
     paddingBottom: 130,
-    // alignItems: "center",
     flexGrow: 1,
   },
   content: {
-    // height: 210,
     justifyContent: "space-between",
   },
   novidades: {

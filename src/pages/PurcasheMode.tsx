@@ -1,23 +1,57 @@
 import React from "react";
-import { StyleSheet, SafeAreaView, View } from "react-native";
-import { H1, Text } from "../components/Typografy/Index";
+import { StyleSheet, SafeAreaView, View, ScrollView } from "react-native";
 import { theme } from "../styles/colors";
-import { MaterialIcons } from "@expo/vector-icons";
+
+//conponents
+import { H1, Text } from "../components/Typografy/Index";
+import { ProductItemList } from "../components/ItemProduct/Index";
+import { LabelButton } from "../components/Button/Index";
+
+//hook
+import { useProduct } from "../contexts/ProductContext";
+
+//interface
+import { ProductItemProps } from "../components/ItemProduct/Add/Index";
 
 export const PurcasheMode = () => {
+  const { productList } = useProduct();
+
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.emptyList}>
-        <MaterialIcons name="info-outline" size={90} color="#30837F" />
-
-        <View>
-          <H1 style={styles.textCentered}>Modo de Compras</H1>
-          <Text.Subtitle style={styles.textCentered}>
-            Aguarde, estamos trabalhando nesta página e logo mais estará
-            completa!
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ width: "100%", paddingBottom: 40 }}
+      >
+        <View style={styles.titleView}>
+          <H1>Modo Compra</H1>
+          <Text.Subtitle>
+            Dê um check nos produtos que está levando.
           </Text.Subtitle>
         </View>
-      </View>
+
+        <View style={styles.productList}>
+          {productList.length != 0 &&
+            productList.map((product: ProductItemProps, index: number) => (
+              <ProductItemList
+                key={index}
+                id={product.id}
+                title={product.title}
+                productImage={product.productImage}
+                variant="default"
+                quantity={product.quantity}
+                isCertified={product.isCertified}
+                certifications={product.certifications}
+              />
+            ))}
+        </View>
+
+        <LabelButton
+          label="Finalizar"
+          onPress={() => {}}
+          size="large"
+          style={{ marginTop: 35, width: 300 }}
+        />
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -28,17 +62,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 5,
+    paddingHorizontal: 30,
   },
-  textCentered: {
-    textAlign: "center",
+  titleView: {
+    marginTop: 35,
+    marginBottom: 10,
+  },
+  productList: {
     marginTop: 10,
-    color: theme.colors.typografy.title.primary,
-  },
-  emptyList: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    marginHorizontal: 40,
   },
 });

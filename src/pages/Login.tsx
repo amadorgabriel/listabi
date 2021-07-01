@@ -18,6 +18,7 @@ import { fonts } from "../styles/fonts";
 
 import AbstractArt from "../assets/abstract-top-art.svg";
 
+//componentes
 import { LabelButton, IconLabelButton } from "../components/Button/Index";
 import { OutlineInput } from "../components/Input/Index";
 import { Display, Text as CustomText } from "../components/Typografy/Index";

@@ -67,7 +67,7 @@ export const SelectMarket: React.FC = () => {
   const [markets, setMarkets] = useState([{} as Market]);
   const [currentMarket, setCurrentMarket] = useState({} as Market);
 
-  const { navigate } = useNavigation()
+  const { navigate } = useNavigation();
 
   useEffect(() => {
     setMarkets(db.markets);
@@ -177,6 +177,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     backgroundColor: theme.colors.background,
+    paddingTop: -35,
   },
   map: {
     width: Dimensions.get("window").width,
@@ -184,7 +185,7 @@ const styles = StyleSheet.create({
   },
   titleView: {
     paddingHorizontal: 30,
-    marginTop: 20,
+    marginTop: 35,
     marginBottom: 30,
   },
   moreInfo: {
