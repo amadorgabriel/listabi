@@ -37,10 +37,10 @@ export const PurcasheMode = () => {
                 id={product.id}
                 title={product.title}
                 productImage={product.productImage}
-                variant="default"
                 quantity={product.quantity}
                 isCertified={product.isCertified}
                 certifications={product.certifications}
+                variant="checkable"
               />
             ))}
         </View>

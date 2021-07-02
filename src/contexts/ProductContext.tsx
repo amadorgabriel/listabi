@@ -68,8 +68,6 @@ export function ProductContextProvider({
       newCurrentProduct.id = productList.length;
       setProductList([...productList, newCurrentProduct]);
 
-      console.log("Ao adicionar quantity: " + newCurrentProduct.quantity);
-
       //seta firstProductWasAdded como adicionado
       await AsyncStorage.setItem("@firstProductWasAdded", "true");
       setFirstProductWasAdded(true);

@@ -35,3 +35,7 @@ ProductContainer.MainContentClose = styled.Pressable`
   height: 20px;
 `
 
+ProductContainer.MainContentCheck = styled.View`
+  width: 40px;
+  align-self: flex-start;
+`
