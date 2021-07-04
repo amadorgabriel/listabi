@@ -16,6 +16,7 @@ export const ProductContainer:any = styled.View`
 
   display: flex;
   flex-direction: row;
+  background-color: #fff;
 `
 
 ProductContainer.MainContent = styled.View`

@@ -36,8 +36,6 @@ export const ProductItemList: React.FC<ProductItemListProps> = ({
   certifications = [],
 }) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const [ deleteList, setDeleteList ] = useState([] as ProductItemProps[])
-
   const { deleteProductById } = useProduct();
 
   const currentProduct: ProductItemProps = {

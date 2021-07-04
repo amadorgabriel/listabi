@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.subtitle,
     color: theme.colors.typografy.paragraph.quartenary,
     fontSize: 15,
+    marginBottom: 2,
   },
   content: {
     width: "100%",

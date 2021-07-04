@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { StyleSheet, View, ScrollView, TouchableHighlight } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -42,7 +42,7 @@ export const Home: React.FC = () => {
             <OutlineInput
               hasIcon
               placeholder="Pesquise por alimentos.."
-              onChange={() => {}}
+              onChange={() => { }}
               onEndEditing={() =>
                 navigate("Main", {
                   screen: "Adicionar",
@@ -136,8 +136,8 @@ export const Home: React.FC = () => {
                       {productList.length == 0
                         ? "Você ainda não adicionou nenhum produto a lista."
                         : productList.length == 1
-                        ? "Você tem 1 item."
-                        : `Você tem ${productList.length} itens.`}
+                          ? "Você tem 1 item."
+                          : `Você tem ${productList.length} itens.`}
                     </Text.Subtitle>
                   </View>
                 </View>
@@ -157,7 +157,7 @@ export const Home: React.FC = () => {
                           certifications={product.certifications}
                         />
                       )
-                    )}
+                    )} 
                 </View>
               </View>
             </View>
