@@ -1,8 +1,14 @@
 import React, { useState } from "react";
-import { StyleSheet, SafeAreaView, View, ScrollView, Dimensions, Animated, Alert } from "react-native";
-import { SwipeListView } from 'react-native-swipe-list-view';
-
-import { theme } from "../styles/colors";
+import {
+  StyleSheet,
+  SafeAreaView,
+  View,
+  ScrollView,
+  Dimensions,
+  Alert,
+} from "react-native";
+import { SwipeListView } from "react-native-swipe-list-view";
+import { useNavigation } from "@react-navigation/native";
 
 //conponents
 import { H1, Text } from "../components/Typografy/Index";
@@ -15,47 +21,97 @@ import { useProduct } from "../contexts/ProductContext";
 //interface
 import { ProductItemProps } from "../components/ItemProduct/Add/Index";
 
-const rowTranslateAnimatedValues = {} as any;
-
-Array(20)
-  .fill('')
-  .forEach((_, i) => {
-    rowTranslateAnimatedValues[`${i}`] = new Animated.Value(1);
-  });
-
 export const PurcasheMode = () => {
-  const { productList } = useProduct();
-  const [animationIsRunning, setAnimationIsRunning] = useState(false)
-  const [productToDeleteList, setProductToDeleteList] = useState([] as ProductItemProps[])
+  const {
+    productList,
+    toDeleteProductList,
+    deleteProductById,
+    setToDeleteProductList,
+  } = useProduct();
+  const [currentProductList, setCurrentProductList] = useState(productList);
+
+  const { navigate } = useNavigation();
 
   const onSwipeValueChange = (swipeData: any) => {
     const { key, value } = swipeData;
 
-    if (
-      value < -Dimensions.get('window').width &&
-      !animationIsRunning
-    ) {
-      setAnimationIsRunning(true)
+    if (value < -Dimensions.get("window").width) {
+      let newList;
 
-      Animated.timing(rowTranslateAnimatedValues[key], {
-        toValue: 0,
-        duration: 200,
-      } as any).start(() => {
+      newList = currentProductList.filter((product: ProductItemProps) => {
+        if (product.id != key) {
+          return product;
+        }
+      });
 
-        // let newData = [...productList];
-        // const prevIndex = productList.findIndex(item => item.id === key);
-        // newData.splice(prevIndex, 1);
-        
-        // console.log(newData)
-        
-        Alert.alert('excluido')
-
-        // setListData(newData);
-        // this.animationIsRunning = false;
-        // setProductToDeleteList[[...toDeleteList, swipeData ]]
-      })
+      setCurrentProductList(newList);
     }
-  }
+  };
+
+  const renderItemProduct = (data: any) => (
+    <ProductItemList
+      id={data.item.id}
+      title={data.item.title}
+      productImage={data.item.productImage}
+      quantity={data.item.quantity}
+      isCertified={data.item.isCertified}
+      certifications={data.item.certifications}
+      variant="checkable"
+    />
+  );
+
+  const renderHiddenItemProduct = () => (
+    <View style={styles.rowBack}>
+      <View style={[styles.backRightBtn, styles.backRightBtnRight]}>
+        <Text style={styles.backTextWhite}>Excluir</Text>
+      </View>
+    </View>
+  );
+
+  const handleFinishPurcashe = () => {
+    if (toDeleteProductList[0] === undefined) {
+      Alert.alert(
+        "Você ainda não comprou nada.",
+        "Tem certeza que quer finalizar a compra?",
+        [
+          {
+            text: "Não",
+            style: "cancel",
+          },
+          {
+            text: "Sim",
+            onPress: () => {
+              navigate("Main");
+            },
+          },
+        ],
+        {
+          cancelable: true,
+        }
+      );
+    } else {
+      productList.map((product, index) => {
+        if (
+          toDeleteProductList[index] != undefined &&
+          toDeleteProductList[index][1] === true
+        ) {
+          //exclui o item
+          deleteProductById(product.id);
+
+          //atualiza os ids
+          let newList = toDeleteProductList;
+
+          newList.map((newItem: [ProductItemProps, boolean], index: number) => {
+            newItem[0].id = index;
+          });
+
+          setToDeleteProductList(newList);
+        }
+      });
+
+      navigate("Main");
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -70,67 +126,36 @@ export const PurcasheMode = () => {
           </Text.Subtitle>
         </View>
 
-        <View>
+        <View style={{ flex: 1 }}>
           {productList.length != 0 && (
-
             <SwipeListView
+              data={currentProductList}
+              onSwipeValueChange={onSwipeValueChange}
+              renderItem={renderItemProduct}
+              renderHiddenItem={renderHiddenItemProduct}
               disableRightSwipe
-              rightOpenValue={-Dimensions.get('window').width}
-              previewRowKey={'0'}
+              rightOpenValue={-Dimensions.get("window").width}
+              previewRowKey={"0"}
               previewOpenValue={-40}
               previewOpenDelay={3000}
               useNativeDriver={false}
-
-              data={productList as ProductItemProps[]}
-              onSwipeValueChange={onSwipeValueChange}
-              renderItem={(data) => (
-                <Animated.View
-                  style={
-                    {
-                      height: rowTranslateAnimatedValues[
-                        data.item.id
-                      ].interpolate({
-                        inputRange: [0, 0],
-                        outputRange: [0, 112],
-                      }),
-                    }
-                  }
-                >
-                  <ProductItemList
-                    id={data.item.id}
-                    title={data.item.title}
-                    productImage={data.item.productImage}
-                    quantity={data.item.quantity}
-                    isCertified={data.item.isCertified}
-                    certifications={data.item.certifications}
-                    variant="checkable"
-                  />
-                </Animated.View>
-              )
-              }
-
-              renderHiddenItem={(data, rowMap) => (
-                <View style={styles.rowBack}>
-                  <View style={[styles.backRightBtn, styles.backRightBtnRight]}>
-                    <Text style={styles.backTextWhite}>Excluir</Text>
-                  </View>
-                </View>
-              )}
+              keyExtractor={(item) => item.id.toString()}
+              scrollEnabled={false}
+              style={{ height: "100%" }}
             />
-          )
-          }
+          )}
         </View>
 
         <LabelButton
           label="Finalizar"
-          onPress={() => { }}
+          onPress={handleFinishPurcashe}
           size="large"
           style={{ marginTop: 35, width: 300 }}
         />
       </ScrollView>
     </SafeAreaView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -145,35 +170,35 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   backTextWhite: {
-    color: '#FFF',
+    color: "#FFF",
   },
   rowFront: {
-    alignItems: 'center',
-    backgroundColor: '#CCC',
-    borderBottomColor: 'black',
+    alignItems: "center",
+    backgroundColor: "#CCC",
+    borderBottomColor: "black",
     borderBottomWidth: 1,
-    justifyContent: 'center',
-    height: 80
+    justifyContent: "center",
+    height: 80,
   },
   rowBack: {
     marginTop: 10,
-    alignItems: 'center',
-    backgroundColor: 'red',
+    alignItems: "center",
+    backgroundColor: "red",
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    borderRadius: 15
+    flexDirection: "row",
+    justifyContent: "space-between",
+    borderRadius: 15,
   },
   backRightBtn: {
-    alignItems: 'center',
+    alignItems: "center",
     bottom: 0,
-    justifyContent: 'center',
-    position: 'absolute',
+    justifyContent: "center",
+    position: "absolute",
     top: 0,
     width: 75,
   },
   backRightBtnRight: {
-    backgroundColor: 'red',
+    backgroundColor: "red",
     right: 0,
     borderRadius: 15,
   },

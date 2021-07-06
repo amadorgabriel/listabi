@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SwipeListView } from 'react-native-swipe-list-view';
+import { SwipeListView } from "react-native-swipe-list-view";
 import { Ionicons } from "@expo/vector-icons";
 import CheckBox from "@react-native-community/checkbox";
 
@@ -36,7 +36,7 @@ export const ProductItemList: React.FC<ProductItemListProps> = ({
   certifications = [],
 }) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const { deleteProductById } = useProduct();
+  const { deleteProductById, addInToDeleteProductList } = useProduct();
 
   const currentProduct: ProductItemProps = {
     id,
@@ -73,10 +73,13 @@ export const ProductItemList: React.FC<ProductItemListProps> = ({
         {variant === "checkable" ? (
           <ProductContainer.MainContentCheck>
             <CheckBox
-              style={{right: 5}}
+              style={{ right: 5 }}
               disabled={false}
               value={toggleCheckBox}
-              onValueChange={(newValue) => setToggleCheckBox(newValue)}
+              onValueChange={(newValue) => {
+                setToggleCheckBox(newValue),
+                addInToDeleteProductList(currentProduct, newValue);
+              }}
             />
           </ProductContainer.MainContentCheck>
         ) : (
@@ -92,4 +95,3 @@ export const ProductItemList: React.FC<ProductItemListProps> = ({
     </ProductContainer>
   );
 };
-

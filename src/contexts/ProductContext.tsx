@@ -13,12 +13,18 @@ interface ProductContextData {
   modalIsActive: boolean;
   currentProduct: ProductItemProps;
   firstProductWasAdded: boolean;
+  toDeleteProductList: Array<[ProductItemProps, boolean]>;
 
   handleModal: (closeModal?: boolean) => void;
   setCurrentProduct: (currentProduct: ProductItemProps) => void;
   addProductToStorage: () => void;
   deleteProductById: (id: number) => void;
-  updateProductById: (id: number, product: ProductItemProps ) => void;
+  updateProductById: (id: number, product: ProductItemProps) => void;
+  addInToDeleteProductList: (
+    product: ProductItemProps,
+    toDelete: boolean
+  ) => void;
+  setToDeleteProductList: ([]: Array<[ProductItemProps, boolean]>) => void;
 }
 
 interface ProductContextProviderProps {
@@ -35,6 +41,17 @@ export function ProductContextProvider({
   const [productList, setProductList] = useState([] as ProductItemProps[]);
 
   const [firstProductWasAdded, setFirstProductWasAdded] = useState(false);
+
+  const [toDeleteProductList, setToDeleteProductList] = useState(
+    [] as Array<[ProductItemProps, boolean]>
+  );
+
+  function addInToDeleteProductList(
+    product: ProductItemProps,
+    toDelete: boolean
+  ) {
+    setToDeleteProductList([...toDeleteProductList, [product, toDelete]]);
+  }
 
   function handleModal(closeModal?: boolean) {
     if (closeModal === undefined) {
@@ -131,30 +148,30 @@ export function ProductContextProvider({
     await AsyncStorage.setItem("@myProductList", jsonList);
   }
 
-  async function updateProductById(id: number, product: ProductItemProps){
+  async function updateProductById(id: number, product: ProductItemProps) {
     await setProductFromStorageOnState();
-    
+
     for (let index = 0; index < productList.length; index++) {
       const element = productList[index] as ProductItemProps;
 
       if (element.id === id) {
         let newList = [] as ProductItemProps[];
-        
+
         const updatedProduct: ProductItemProps = {
           id: product.id,
           title: product.title,
           quantity: product.quantity,
           productImage: product.productImage,
           isCertified: product.isCertified,
-          certifications: product.certifications
-        }
-               
+          certifications: product.certifications,
+        };
+
         //insere o produto numa nova lista - imutabilidade
         productList.map((productItem: ProductItemProps) => {
           if (productItem.id !== updatedProduct.id) {
             newList.push(productItem);
-          }else{
-            newList.push(updatedProduct) ;
+          } else {
+            newList.push(updatedProduct);
           }
         });
 
@@ -167,7 +184,6 @@ export function ProductContextProvider({
         break;
       }
     }
-
   }
 
   useEffect(() => {
@@ -185,7 +201,10 @@ export function ProductContextProvider({
         addProductToStorage,
         productList,
         deleteProductById,
-        updateProductById
+        updateProductById,
+        addInToDeleteProductList,
+        toDeleteProductList,
+        setToDeleteProductList
       }}
     >
       {children}
