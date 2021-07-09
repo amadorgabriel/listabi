@@ -1,6 +1,6 @@
 
 <p align="center" >
-  <img align="center"src="https://i.pinimg.com/originals/7c/7f/56/7c7f5698fd9a5adb4761224fe849d071.jpg" />
+  <img align="center"src="./assets/listabi-cover.jpg" />
 </p>
 
 <p align="center">
@@ -16,18 +16,17 @@
 <div id="tabela-de-conteudo" />
 
 ## :point_right: Tabela de Conteúdo
-- [Tabela de Conteúdos](#tabela-de-conteudo)
-- [Sobre o Projeto](#about)   
-  - [Problema](#problem)
-  - [Etapas](#steps)
-- [Tecnologias](#tech)
-- [Pre Requisitos](#pre-requisitos)
-- [Clone o Projeto](#clonando)
-  - [Rodando App Mobile](#run)
-- [Contribuindo](#contribute) 
-- [Features](#features)
-- [Interface](#layout)
-- [Licença](#licenca)
+- [:point_right: Tabela de Conteúdo](#point_right-tabela-de-conteúdo)
+- [:speech_balloon:	Sobre o Projeto](#speech_balloonsobre-o-projeto)
+  - [Problema](#problema)
+- [:rocket: Tecnologias](#rocket-tecnologias)
+- [📦️ Pré-Requisitos](#️-pré-requisitos)
+- [:octocat: Clone o Projeto](#octocat-clone-o-projeto)
+  - [Rodando App Mobile](#rodando-app-mobile)
+- [:tada: Contribuindo](#tada-contribuindo)
+- [:ring: Features](#ring-features)
+- [🎨 Interface](#-interface)
+- [:memo: Licença](#memo-licença)
 
 
 <div id="about" />
@@ -46,24 +45,6 @@
   
  O objetivo principal foi encontrado através de sessões em pesquisas, aonde foram levantados dados como "Pessoas somente passariam adotar mais atos sustentáveis quando percebessem que suas atitudes seriam capazes de trazer benefícios para o coletivo da sociedade...", <strong>PUCRS, <a href="https://www.pucrs.br/blog/sustentabilidade-cresce-entre-os-jovens-brasileiros-aponta-estudo-da-pucrs/">acesse o estudo aqui.</a></strong>  
 </p>
-
-<div id="steps" />
-
-###	Etapas
-
-Houveram diversas etapas para a construção do projeto, dentre elas 
-- Planejamentos 
-- Pesquisas quantitativas, secundárias 
-- Brainstorms 
-- Como Poderíamos? 
-- Jornada do Usuário 
-- Protótipos 
-- Canvas de modelo de negócio 
-- Proposta de Valor 
-- MVP 
-- Desenvolvimento 
-- Mentorias 
-- Apresentação
 
 
 <div id="tech" />
@@ -160,6 +141,7 @@ Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para
 <p align="center" > 
    Projeto desenvolvido com :heart:
 </p>
+
 
 
 

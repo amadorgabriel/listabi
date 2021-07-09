@@ -96,7 +96,7 @@ export const PurcasheMode = () => {
           toDeleteProductList[index][1] === true
         ) {
           //exclui o item
-          deleteProductById(product.id);
+          // deleteProductById(product.id);
 
           //atualiza os ids
           let newList = toDeleteProductList;
