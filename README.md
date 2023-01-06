@@ -58,7 +58,7 @@
 <div id="pre-requisitos" />
 
 ## 📦️ Pré-Requisitos
-Antes de começar você vai precisar ter instalado na sua máquina as ferramentas [Git](https://git-scm.com/downloads) e [Node](https://nodejs.org/en/), no seu celular instale o aplicativo [Expo Go](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=pt_BR&gl=US)
+Antes de começar você vai precisar ter instalado na sua máquina as ferramentas [Git](https://git-scm.com/downloads) e [Node](https://nodejs.org/en/), no seu celular instale o aplicativo [Expo Go](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=pt_BR&gl=US).
 
 
 <div id="clonando" />
@@ -139,7 +139,7 @@ Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para
 ---
 
 <p align="center" > 
-   Projeto desenvolvido com :heart:
+   :heart: Projeto desenvolvido com :heart:
 </p>
 
 
